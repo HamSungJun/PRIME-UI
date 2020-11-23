@@ -1,24 +1,14 @@
-# prime-ui
+# PRIME-UI
 
-## Project setup
-```
-npm install
-```
+## Purpose
+- `Serviced by` [StoryBook.js](https://github.com/storybookjs/storybook)
+- Research 👉 Analyze 👉 Reconstruction
+- Learning Advanced Use of CSS, JS
+- To Be Best FE Engineer
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Contents
+- Empty ;)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Reference
+- [Element-UI](https://element.eleme.cn/#/en-US)
+- [BootStrap-Vue](https://bootstrap-vue.org/)
