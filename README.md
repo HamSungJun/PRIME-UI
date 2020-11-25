@@ -2,7 +2,7 @@
 
 ## Purpose
 - `Serviced by` [StoryBook.js](https://github.com/storybookjs/storybook)
-- Research 👉 Analyze 👉 Reconstruction
+- Requirements 👉 Research 👉 Analyze 👉 Reconstruction
 - Learning Advanced Use of CSS, JS
 - To Be Best FE Engineer
 
