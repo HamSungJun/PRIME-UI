@@ -1,0 +1,28 @@
+$font-path: '../assets/fonts';
+
+/**
+ * @mixin font-face
+ * 폰트 페이스 명세를 생산하는 믹스인 함수
+ * @param {String} $name 폰트 패밀리 이름
+ * @param {String} $file 폰트 파일 이름
+ * @param {Number} $weight 폰트 굵기
+ * @param {String} $style 폰트 스타일
+ */
+
+@mixin font-face($name, $file, $weight: normal, $style: normal){
+  @font-face{
+    font-family: '#{$name}';
+    src: url('#{$font-path}/#{$file}.woff') format('woff');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@include font-face('Noto Sans Korean', 'NotoSansKR-Thin-Hestia', 100, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-Light-Hestia', 300, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-DemiLight-Hestia', 350, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-Regular-Hestia', 400, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-Medium-Hestia', 500, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-Bold-Hestia', 700, 'normal');
+@include font-face('Noto Sans Korean', 'NotoSansKR-Black-Hestia', 900, 'normal');
+

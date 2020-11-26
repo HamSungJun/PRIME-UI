@@ -1,27 +1,22 @@
 <template>
   <div id="app">
+    <pui-button></pui-button>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'App',
-  methods: {
-    greet () {
-      console.log('greet')
-    }
-  }
+  name: 'App'
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

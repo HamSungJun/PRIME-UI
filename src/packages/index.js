@@ -1,4 +1,4 @@
-import PuiButton from './components/pui-button/pui-button'
+import PuiButton from './pui-button/pui-button'
 
 const Components = [
   PuiButton
