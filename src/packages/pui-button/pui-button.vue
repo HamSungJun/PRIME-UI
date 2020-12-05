@@ -83,10 +83,6 @@ export default {
   cursor: pointer;
   transition: #{$button-transitions};
 
-  &:hover{
-    opacity: 0.85;
-  }
-
   span{
     display: inherit;
     transform: translateY(1px);

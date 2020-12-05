@@ -8,15 +8,12 @@
       >
         안녕하세요
       </pui-button>
-    </div>
-    <div>
       <pui-button
         v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
-        :key="i"
+        :key="i+6"
         :type="type"
         :outline="true"
-        round
-        @click="onClick"
+
       >
         안녕하세요
       </pui-button>
