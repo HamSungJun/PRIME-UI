@@ -1,13 +1,36 @@
 <template>
   <div id="app">
-    <pui-button></pui-button>
+    <div>
+      <pui-button
+        v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
+        :key="i"
+        :type="type"
+      >
+        안녕하세요
+      </pui-button>
+    </div>
+    <div>
+      <pui-button
+        v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
+        :key="i"
+        :type="type"
+        :outline="true"
+        round
+        @click="onClick"
+      >
+        안녕하세요
+      </pui-button>
+    </div>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+
+  }
 }
 </script>
 
@@ -18,5 +41,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 </style>

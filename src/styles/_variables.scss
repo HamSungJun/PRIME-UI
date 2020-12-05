@@ -1,0 +1,17 @@
+/* PUI-BUTTON */
+$button-types:   'success', 'info', 'warning', 'danger';
+$button-colors:   '#ffffff', '#ffffff', '#ffffff', '#ffffff';
+$button-background-colors:   '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
+$button-border-colors:  'transparent', 'transparent', 'transparent', 'transparent', 'transparent';
+$button-outline-colors:  '#2979ff', '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
+$button-outline-background-colors:  '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff';
+$button-outline-border-colors:  '#2979ff', '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
+$button-themes: ('default','#212121','#ffffff','#bdbdbd','#212121','#ffffff','#212121',),
+('primary', '#ffffff', '#2979ff',), (), (), (), ();
+$button-sizes: ('mini', '0.7rem', '0.85rem'), ('small', '0.8rem', '0.85rem'), ('medium', '0.9rem', '1rem'), ('default', '1rem 1rem', '1rem');
+$button-shapes: ('rect','0px'), ('round', '22px');
+:root {
+    font-size: 14px;
+}
+
+
