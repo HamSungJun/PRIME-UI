@@ -1,5 +1,12 @@
 @import './_fonts.scss';
 
+:root {
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.02rem;
+}
+
 *{
   font-family: 'Noto Sans Korean', sans-serif;
   font-size: 1rem;

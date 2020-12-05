@@ -1,17 +1,24 @@
-/* PUI-BUTTON */
-$button-types:   'success', 'info', 'warning', 'danger';
-$button-colors:   '#ffffff', '#ffffff', '#ffffff', '#ffffff';
-$button-background-colors:   '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
-$button-border-colors:  'transparent', 'transparent', 'transparent', 'transparent', 'transparent';
-$button-outline-colors:  '#2979ff', '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
-$button-outline-background-colors:  '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff';
-$button-outline-border-colors:  '#2979ff', '#9e9e9e', '#00e676', '#ffb74d', '#f44336';
-$button-themes: ('default','#212121','#ffffff','#bdbdbd','#212121','#ffffff','#212121',),
-('primary', '#ffffff', '#2979ff',), (), (), (), ();
-$button-sizes: ('mini', '0.7rem', '0.85rem'), ('small', '0.8rem', '0.85rem'), ('medium', '0.9rem', '1rem'), ('default', '1rem 1rem', '1rem');
-$button-shapes: ('rect','0px'), ('round', '22px');
-:root {
-    font-size: 14px;
-}
+/** 
+ * PUI-BUTTON
+ * $button-themes: ($type, $color, $background-color, $border-color, $outline-color, $outline-background-color, $outline-border-color)
+ * $button-sizes: ($size, $padding, $fontsize)
+ * $button-shapes: ($shape, $radius)
+ */
 
+$button-themes:
+('default','#212121','#ffffff','#bdbdbd','#212121','#ffffff','#212121',),
+('primary', '#ffffff', '#2979ff','transparent', '#2979ff', '#ffffff', '#2979ff'),
+('success','#ffffff', '#9e9e9e', 'transparent', '#9e9e9e', '#ffffff', '#9e9e9e'),
+('info', '#ffffff', '#00e676', 'transparent', '#00e676', '#ffffff', '#00e676'),
+('warning', '#ffffff', '#ffb74d', 'transparent', '#ffb74d', '#ffffff', '#ffb74d'),
+('danger', '#ffffff', '#f44336', 'transparent', '#f44336', '#ffffff', '#f44336');
+$button-sizes:
+('mini', '0.7rem', '0.85rem'),
+('small', '0.8rem', '0.85rem'),
+('medium', '0.9rem', '1rem'),
+('default', '1rem 1rem', '1rem');
+$button-shapes: 
+('rect','0px'),
+('round', '22px');
+$button-transitions: 'background 0.25s ease-in';
 

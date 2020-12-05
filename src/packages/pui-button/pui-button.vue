@@ -65,9 +65,6 @@ export default {
       required: false
     }
   },
-  mounted () {
-    console.log(this.$slots)
-  },
   methods: {
     onClick (event) {
       this.$emit('click', event)
@@ -84,6 +81,7 @@ export default {
   border-radius: 4px;
   padding: 0.75rem;
   cursor: pointer;
+  transition: #{$button-transitions};
 
   &:hover{
     opacity: 0.85;
@@ -91,7 +89,7 @@ export default {
 
   span{
     display: inherit;
-    transform: translateY(2px);
+    transform: translateY(1px);
   }
 
   @each $type, $color, $background-color, $border-color, $outline-color, $outline-background-color, $outline-border-color in $button-themes{
@@ -104,6 +102,10 @@ export default {
       color: #{$outline-color};
       background-color: #{$outline-background-color};
       border-color: #{$outline-border-color};
+      &:hover{
+        color: #ffffff;
+        background-color: #{$outline-border-color};
+      }
     }
   }
 
@@ -121,7 +123,8 @@ export default {
   }
 
   &.pui-button--status-disabled{
-
+    opacity: 0.60;
+    pointer-events: none;
   }
 }
 </style>
