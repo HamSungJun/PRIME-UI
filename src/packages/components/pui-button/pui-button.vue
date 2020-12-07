@@ -14,9 +14,7 @@
     ]"
     @click.stop="onClick"
   >
-    <i v-if="icon && iconPlacement === 'left'" :class="icon"></i>
     <span v-if="$slots.default"><slot></slot></span>
-    <i v-if="icon && iconPlacement === 'right'" :class="icon"></i>
   </div>
 </template>
 
@@ -26,23 +24,17 @@ export default {
   props: {
     rect: {
       type: Boolean,
+      default: false,
       required: false
     },
     round: {
       type: Boolean,
-      required: false
-    },
-    icon: {
-      type: String,
-      required: false
-    },
-    iconPlacement: {
-      type: String,
-      default: 'left',
+      default: false,
       required: false
     },
     outline: {
       type: Boolean,
+      default: false,
       required: false
     },
     type: {
@@ -62,8 +54,12 @@ export default {
     },
     customClass: {
       type: String,
+      default: '',
       required: false
     }
+  },
+  created () {
+    this.onClick = this.$common.wrapThrottle(this.onClick)
   },
   methods: {
     onClick (event) {
@@ -74,6 +70,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/**
+ * PUI-BUTTON
+ * $button-themes: ($type, $color, $background-color, $border-color, $outline-color, $outline-background-color, $outline-border-color)
+ * $button-sizes: ($size, $padding, $fontsize)
+ * $button-shapes: ($shape, $radius)
+ */
+$button-themes:
+('default','#ffffff','#212121','#212121','#212121','#ffffff','#212121',),
+('primary', '#ffffff', '#2979ff','transparent', '#2979ff', '#ffffff', '#2979ff'),
+('info','#ffffff', '#9e9e9e', 'transparent', '#9e9e9e', '#ffffff', '#9e9e9e'),
+('success', '#ffffff', '#00e676', 'transparent', '#00e676', '#ffffff', '#00e676'),
+('warning', '#ffffff', '#ffb74d', 'transparent', '#ffb74d', '#ffffff', '#ffb74d'),
+('danger', '#ffffff', '#f44336', 'transparent', '#f44336', '#ffffff', '#f44336');
+$button-sizes:
+('mini', '0.7rem', '0.85rem'),
+('small', '0.8rem', '0.85rem'),
+('medium', '0.9rem', '1rem'),
+('default', '1rem 1rem', '1rem');
+$button-shapes:
+('rect','0px'),
+('round', '22px');
+$button-transitions: 'background 0.25s ease-in';
 .pui-button {
   display: inline-block;
   border-width: 1px;

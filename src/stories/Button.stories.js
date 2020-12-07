@@ -1,39 +1,50 @@
-import MyButton from './Button.vue'
+import PuiButton from '../packages/components/pui-button/pui-button'
 
 export default {
   title: 'PRIME-UI/Button',
-  component: MyButton,
+  component: PuiButton,
   argTypes: {
-    backgroundColor: { control: 'color' },
-    size: { control: { type: 'select', options: ['small', 'medium', 'large'] } }
+    type: {
+      control: {
+        type: 'select',
+        options: [
+          'default',
+          'primary',
+          'success',
+          'info',
+          'warning',
+          'danger'
+        ]
+      }
+    },
+    size: { control: { type: 'select', options: ['default', 'medium', 'small', 'mini'] } }
   }
 }
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { MyButton },
-  template: '<my-button @onClick="onClick" v-bind="$props" />'
+  components: { PuiButton },
+  template: '<pui-button v-bind="$props">Pui-Button</pui-button>'
 })
 
-export const Primary = Template.bind({})
+export const Default = Template.bind({});
+export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
-  label: 'Button'
+  type: 'primary'
 }
-
-export const Secondary = Template.bind({})
-Secondary.args = {
-  label: 'Button'
+export const Success = Template.bind({});
+Success.args = {
+  type: 'success'
 }
-
-export const Large = Template.bind({})
-Large.args = {
-  size: 'large',
-  label: 'Button'
+export const Info = Template.bind({});
+Info.args = {
+  type: 'info'
 }
-
-export const Small = Template.bind({})
-Small.args = {
-  size: 'small',
-  label: 'Button'
+export const Warning = Template.bind({});
+Warning.args = {
+  type: 'warning'
+}
+export const Danger = Template.bind({});
+Danger.args = {
+  type: 'danger'
 }

@@ -7,7 +7,7 @@
 - To Be Best FE Engineer
 
 ## Contents
-- [Button](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/pui-button)
+- [Button](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-button)
 
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)

@@ -5,6 +5,7 @@
         v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
         :key="i"
         :type="type"
+        @click="onClick"
       >
         안녕하세요
       </pui-button>
@@ -26,7 +27,9 @@
 export default {
   name: 'App',
   methods: {
-
+    onClick (e) {
+      console.log(e)
+    }
   }
 }
 </script>
