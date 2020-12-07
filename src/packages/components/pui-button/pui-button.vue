@@ -56,10 +56,15 @@ export default {
       type: String,
       default: '',
       required: false
+    },
+    eventRate: {
+      type: Number,
+      default: 144,
+      required: false
     }
   },
   created () {
-    this.onClick = this.$common.wrapThrottle(this.onClick)
+    this.onClick = this.$common.wrapThrottle(this.onClick, this.eventRate || undefined)
   },
   methods: {
     onClick (event) {
