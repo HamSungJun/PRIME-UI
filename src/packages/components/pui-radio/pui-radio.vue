@@ -7,15 +7,19 @@
       {
         'pui-radio--is-block': block,
         'pui-radio--is-border': border,
-        'pui-button--status-disabled': disabled
+        'pui-radio--status-disabled': disabled
       },
       customClass ? customClass : ''
     ]"
-    @click="onChange($event, label)"
+    @click.stop="onChange($event, label)"
   >
     <span
       :class="[
-        'pui-radio__circle'
+        'pui-radio__circle',
+        {
+          'pui-radio__circle--selected': value === label,
+          'pui-radio__circle--shape-rect': circleRect,
+        }
       ]"
     >
     </span>
@@ -23,18 +27,27 @@
       :class="[
         'pui-radio__label'
       ]"
-    >{{label}}</span>
+    >
+      {{label}}
+    </span>
   </label>
 </template>
 <script>
 export default {
   name: 'pui-radio',
   props: {
+    value: {
+      type: String,
+      required: true,
+      validator (value) {
+        return Object.is(typeof value, 'string')
+      }
+    },
     label: {
       type: String,
       required: true,
       validator (value) {
-        return Object.is(typeof value, 'string') && value.length > 0
+        return Object.is(typeof value, 'string')
       }
     },
     type: {
@@ -66,11 +79,11 @@ export default {
       type: String,
       default: '',
       required: false
-    }
-  },
-  data () {
-    return {
-      isHovered: false
+    },
+    circleRect: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
   methods: {
@@ -86,12 +99,12 @@ export default {
  * $radio-themes: ($type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $radio-hover-color)
  */
 $radio-themes:
-('default', $color-default, $color-default, $color-default, #ffffff, $color-default, $color-default),
-('primary', $color-primary, $color-primary, $color-primary, #ffffff, $color-primary, $color-primary),
-('info', $color-info, $color-info, $color-info, #ffffff, $color-info, $color-info),
-('success', $color-success, $color-success, $color-success, #ffffff, $color-success, $color-success),
-('warning', $color-warning, $color-warning, $color-warning, #ffffff, $color-warning, $color-warning),
-('danger', $color-danger, $color-danger, $color-danger, #ffffff, $color-danger, $color-danger);
+('default', $color-default, $color-default, $color-default, #ffffff, $color-default, $color-lightdark),
+('primary', $color-primary, $color-primary, $color-primary, #ffffff, $color-default, $color-lightblue),
+('info', $color-info, $color-info, $color-info, #ffffff, $color-default, $color-info),
+('success', $color-success, $color-success, $color-success, #ffffff, $color-default, $color-lightgreen),
+('warning', $color-warning, $color-warning, $color-warning, #ffffff, $color-default, $color-lightorange),
+('danger', $color-danger, $color-danger, $color-danger, #ffffff, $color-default, $color-lightred);
 $radio-circle-transition: 'all 0.25s ease';
 $radio-label-transition: 'color 0.25s ease';
 .pui-radio {
@@ -102,7 +115,7 @@ $radio-label-transition: 'color 0.25s ease';
   &.pui-radio--is-border{
     border-width: 1px;
     border-style: solid;
-    border-radius: $radius-default;
+    border-radius: $radius-rect;
   }
 
   &.pui-radio--is-block{
@@ -136,6 +149,13 @@ $radio-label-transition: 'color 0.25s ease';
       height: 4px;
       background-color: #ffffff;
     }
+
+    &.pui-radio__circle--shape-rect{
+      border-radius: $radius-rect;
+      &::after{
+        border-radius: $radius-rect;
+      }
+    }
   }
 
   .pui-radio__label{
@@ -148,11 +168,24 @@ $radio-label-transition: 'color 0.25s ease';
   @each $type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $radio-hover-color in $radio-themes{
     &.pui-radio--type-#{$type}{
       border-color: #{$label-border-color};
+      &:hover{
+        .pui-radio__circle{
+          background-color: $radio-hover-color;
+          &::after{
+            background-color: $circle-inner-background-color;
+          }
+        }
+      }
       .pui-radio__circle{
         border-color: #{$circle-border-color};
-        background-color: $circle-background-color;
         &::after{
-          background-color: $circle-inner-background-color;
+          background-color: transparent;
+        }
+        &.pui-radio__circle--selected{
+          background-color: $circle-background-color;
+          &::after{
+            background-color: $circle-inner-background-color;
+          }
         }
       }
       .pui-radio__label{

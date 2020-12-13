@@ -5,11 +5,13 @@
         v-for="(theme, i) in ['default','primary','success', 'info', 'warning', 'danger']"
         :key="i"
         :type="theme"
-        label="안녕하세요"
+        :label="theme"
+        :value="radioValue"
         @change="onChange"
         border
-        >
-        </pui-radio>
+        circle-rect
+      >
+      </pui-radio>
     </div>
   </div>
 </template>
@@ -18,12 +20,17 @@
 
 export default {
   name: 'App',
+  data () {
+    return {
+      radioValue: 'default'
+    }
+  },
   methods: {
     onClick (e) {
       console.log(e)
     },
     onChange (payload) {
-      console.log(payload)
+      this.radioValue = payload.label
     }
   }
 }
