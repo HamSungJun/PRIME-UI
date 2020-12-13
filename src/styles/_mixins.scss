@@ -1,0 +1,10 @@
+/**
+ * status-disabled
+ * 엘리먼트의 비활성상태를 표현하는 믹스인 함수
+ */
+
+@mixin status-disabled{
+    opacity: 0.60;
+    pointer-events: none;
+}
+

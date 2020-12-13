@@ -82,27 +82,26 @@ export default {
  * $button-shapes: ($shape, $radius)
  */
 $button-themes:
-('default','#ffffff','#212121','#212121','#212121','#ffffff','#212121',),
-('primary', '#ffffff', '#2979ff','transparent', '#2979ff', '#ffffff', '#2979ff'),
-('info','#ffffff', '#9e9e9e', 'transparent', '#9e9e9e', '#ffffff', '#9e9e9e'),
-('success', '#ffffff', '#00e676', 'transparent', '#00e676', '#ffffff', '#00e676'),
-('warning', '#ffffff', '#ffb74d', 'transparent', '#ffb74d', '#ffffff', '#ffb74d'),
-('danger', '#ffffff', '#f44336', 'transparent', '#f44336', '#ffffff', '#f44336');
+('default', '#ffffff', $color-default, $color-default, $color-default, '#ffffff', $color-default),
+('primary', '#ffffff', $color-primary,'transparent', $color-primary, '#ffffff', $color-primary),
+('info','#ffffff', $color-info, 'transparent', $color-info, '#ffffff', $color-info),
+('success', '#ffffff', $color-success, 'transparent', $color-success, '#ffffff', $color-success),
+('warning', '#ffffff', $color-warning, 'transparent', $color-warning, '#ffffff', $color-warning),
+('danger', '#ffffff', $color-danger, 'transparent', $color-danger, '#ffffff', $color-danger);
 $button-sizes:
-('mini', '0.7rem', '0.85rem'),
-('small', '0.8rem', '0.85rem'),
-('medium', '0.9rem', '1rem'),
-('default', '1rem 1rem', '1rem');
+('mini', $padding-mini, $fontsize-mini),
+('small', $padding-small, $fontsize-small),
+('medium', $padding-medium, $fontsize-medium),
+('default', $padding-default, $fontsize-default);
 $button-shapes:
-('rect','0px'),
-('round', '22px');
+('rect',$radius-rect),
+('round', $radius-round);
 $button-transitions: 'background 0.25s ease-in';
 .pui-button {
   display: inline-block;
   border-width: 1px;
   border-style: solid;
-  border-radius: 4px;
-  padding: 0.75rem;
+  border-radius: $radius-default;
   cursor: pointer;
   transition: #{$button-transitions};
 
@@ -142,8 +141,7 @@ $button-transitions: 'background 0.25s ease-in';
   }
 
   &.pui-button--status-disabled{
-    opacity: 0.60;
-    pointer-events: none;
+    @include status-disabled;
   }
 }
 </style>

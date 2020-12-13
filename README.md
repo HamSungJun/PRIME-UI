@@ -8,6 +8,7 @@
 
 ## Contents
 - [Button](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-button)
+- [Radio](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-radio)
 
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)

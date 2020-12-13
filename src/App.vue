@@ -1,23 +1,15 @@
 <template>
   <div id="app">
     <div>
-      <pui-button
-        v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
+      <pui-radio
+        v-for="(theme, i) in ['default','primary','success', 'info', 'warning', 'danger']"
         :key="i"
-        :type="type"
-        @click="onClick"
-      >
-        안녕하세요
-      </pui-button>
-      <pui-button
-        v-for="(type, i) in ['default', 'primary', 'success', 'info', 'warning', 'danger']"
-        :key="i+6"
-        :type="type"
-        :outline="true"
-
-      >
-        안녕하세요
-      </pui-button>
+        :type="theme"
+        label="안녕하세요"
+        @change="onChange"
+        border
+        >
+        </pui-radio>
     </div>
   </div>
 </template>
@@ -29,6 +21,9 @@ export default {
   methods: {
     onClick (e) {
       console.log(e)
+    },
+    onChange (payload) {
+      console.log(payload)
     }
   }
 }
