@@ -40,6 +40,6 @@
 
 ## Reference
 
-- https://element.eleme.io/#/en-US/component/radio
-- https://bootstrap-vue.org/docs/components/form-radio
+- https://element.eleme.io/#/en-US/component/checkbox
+- https://bootstrap-vue.org/docs/components/form-checkbox
 - https://brunch.co.kr/@ebprux/79
