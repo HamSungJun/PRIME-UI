@@ -33,8 +33,7 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-  label: 'Pui-Radio',
-  value: 'Pui-Radio'
+  label: 'Pui-Radio'
 }
 export const Primary = Template.bind({})
 Primary.args = {

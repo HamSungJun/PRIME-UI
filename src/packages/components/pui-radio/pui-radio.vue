@@ -17,18 +17,20 @@
       :class="[
         'pui-radio__circle',
         {
-          'pui-radio__circle--selected': value === label,
+          'pui-radio__circle--selected': selectValue === label,
           'pui-radio__circle--shape-rect': circleRect,
         }
       ]"
     >
     </span>
     <span
+      v-if="$slots.default || label"
       :class="[
         'pui-radio__label'
       ]"
     >
-      {{label}}
+      <slot></slot>
+      <template v-if="!slots.default">{{label}}</template>
     </span>
   </label>
 </template>
@@ -36,7 +38,7 @@
 export default {
   name: 'pui-radio',
   props: {
-    value: {
+    selectValue: {
       type: String,
       required: true,
       validator (value) {
