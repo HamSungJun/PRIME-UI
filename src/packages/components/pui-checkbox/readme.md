@@ -38,7 +38,7 @@
 
 - 마우스 호버시 체크박스에 대한 스타일을 표현할 수 있다. (Hover)
 
-- index 프로퍼티가 존재한다면 `{ index, checked: !checked }` 데이터를, 존재하지 않는다면 `label` 데이터를 부모 컴포넌트로 emit()
+- index 프로퍼티가 존재한다면 `{ index: this.index }` 데이터를, 존재하지 않는다면 `label` 데이터를 부모 컴포넌트로 emit()
 
 ## Reference
 

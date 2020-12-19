@@ -10,7 +10,7 @@
       },
       customClass ? customClass : ''
     ]"
-    @click.stop="onChange($event, label)"
+    @click.stop="onClick($event, label)"
   >
     <span
       :class="[
@@ -84,7 +84,7 @@ export default {
     }
   },
   methods: {
-    onChange (event, label) {
+    onClick (event, label) {
       this.$emit('change', { event, label })
     }
   }
@@ -93,7 +93,7 @@ export default {
 <style lang="scss" scoped>
 /**
  * PUI-RADIO
- * $radio-themes: ($type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $label-selected-color, $radio-hover-color)
+ * $radio-themes: ($theme, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $label-selected-color, $radio-hover-color)
  */
 $radio-themes:
 ('dark', $color-dark, $color-dark, $color-lightdark, #ffffff, $color-dark, $color-dark, $color-lightdark),
@@ -116,14 +116,14 @@ $radio-label-transition: color 0.25s ease;
   white-space: nowrap;
   padding: 0.4rem;
 
+  &.pui-radio--is-block{
+    display: block;
+  }
+
   &.pui-radio--is-border{
     border-width: 1px;
     border-style: solid;
     border-radius: $radius-rect;
-  }
-
-  &.pui-radio--is-block{
-    display: block;
   }
 
   &.pui-radio--status-disabled{
@@ -173,10 +173,10 @@ $radio-label-transition: color 0.25s ease;
 
   @each $theme, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $label-selected-color, $radio-hover-color in $radio-themes{
     &.pui-radio--theme-#{$theme}{
-      border-color: #{$label-border-color};
+      border-color: $label-border-color;
       &:hover{
         .pui-radio__circle{
-          background-color: $radio-hover-color;
+          background-color: $circle-background-color;
           &::after{
             background-color: $circle-inner-background-color;
           }
@@ -184,7 +184,7 @@ $radio-label-transition: color 0.25s ease;
       }
 
       .pui-radio__circle{
-        border-color: #{$circle-border-color};
+        border-color: $circle-border-color;
         &::after{
           background-color: transparent;
         }
