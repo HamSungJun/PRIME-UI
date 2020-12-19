@@ -2,14 +2,14 @@
   <div id="app">
     <div>
       <pui-radio
-        v-for="(theme, i) in ['default','primary','success', 'info', 'warning', 'danger']"
+        v-for="(theme, i) in ['dark','blue','green', 'gray', 'orange', 'red']"
         :key="i"
-        :type="theme"
+        :theme="theme"
         :label="theme"
-        :value="radioValue"
+        :select-value="radioValue"
+        :radio-shape="'rect'"
         @change="onChange"
-        border
-        circle-rect
+        :border="true"
       >
       </pui-radio>
     </div>

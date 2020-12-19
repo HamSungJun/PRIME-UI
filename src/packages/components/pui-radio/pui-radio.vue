@@ -2,8 +2,7 @@
   <label
     :class="[
       'pui-radio',
-      type ? 'pui-radio--type-' + type : '',
-      size ? 'pui-radio--size-' + size : '',
+      'pui-radio--theme-' + (theme || 'dark'),
       {
         'pui-radio--is-block': block,
         'pui-radio--is-border': border,
@@ -16,21 +15,23 @@
     <span
       :class="[
         'pui-radio__circle',
+        'pui-radio__circle--shape-' + (radioShape || 'circle'),
         {
-          'pui-radio__circle--selected': selectValue === label,
-          'pui-radio__circle--shape-rect': circleRect,
+          'pui-radio__circle--selected': isSelected,
         }
       ]"
     >
     </span>
     <span
-      v-if="$slots.default || label"
+      v-if="label"
       :class="[
-        'pui-radio__label'
+        'pui-radio__label',
+        {
+          'pui-radio__label--selected': isSelected
+        }
       ]"
     >
-      <slot></slot>
-      <template v-if="!slots.default">{{label}}</template>
+      {{label}}
     </span>
   </label>
 </template>
@@ -40,26 +41,15 @@ export default {
   props: {
     selectValue: {
       type: String,
-      required: true,
-      validator (value) {
-        return Object.is(typeof value, 'string')
-      }
+      required: true
     },
     label: {
       type: String,
-      required: true,
-      validator (value) {
-        return Object.is(typeof value, 'string')
-      }
+      required: true
     },
-    type: {
+    theme: {
       type: String,
-      default: 'default',
-      required: false
-    },
-    size: {
-      type: String,
-      default: 'default',
+      default: 'dark',
       required: false
     },
     block: {
@@ -82,10 +72,15 @@ export default {
       default: '',
       required: false
     },
-    circleRect: {
-      type: Boolean,
-      default: false,
+    radioShape: {
+      type: String,
+      default: 'circle',
       required: false
+    }
+  },
+  computed: {
+    isSelected () {
+      return Object.is(this.selectValue, this.label)
     }
   },
   methods: {
@@ -98,22 +93,29 @@ export default {
 <style lang="scss" scoped>
 /**
  * PUI-RADIO
- * $radio-themes: ($type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $radio-hover-color)
+ * $radio-themes: ($type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $label-selected-color, $radio-hover-color)
  */
 $radio-themes:
-('default', $color-default, $color-default, $color-default, #ffffff, $color-default, $color-lightdark),
-('primary', $color-primary, $color-primary, $color-primary, #ffffff, $color-default, $color-lightblue),
-('info', $color-info, $color-info, $color-info, #ffffff, $color-default, $color-info),
-('success', $color-success, $color-success, $color-success, #ffffff, $color-default, $color-lightgreen),
-('warning', $color-warning, $color-warning, $color-warning, #ffffff, $color-default, $color-lightorange),
-('danger', $color-danger, $color-danger, $color-danger, #ffffff, $color-default, $color-lightred);
-$radio-circle-transition: 'all 0.25s ease';
-$radio-label-transition: 'color 0.25s ease';
+('dark', $color-dark, $color-dark, $color-lightdark, #ffffff, $color-dark, $color-dark, $color-lightdark),
+('blue', $color-blue, $color-blue, $color-lightblue, #ffffff, $color-dark, $color-blue, $color-lightblue),
+('gray', $color-gray, $color-gray, $color-lightgray, #ffffff, $color-dark, $color-gray, $color-lightgray),
+('green', $color-green, $color-green, $color-lightgreen, #ffffff, $color-dark, $color-green, $color-lightgreen),
+('orange', $color-orange, $color-orange, $color-lightorange, #ffffff, $color-dark, $color-orange, $color-lightorange),
+('red', $color-red, $color-red, $color-lightred, #ffffff, $color-dark, $color-red, $color-lightred);
+
+$radio-shapes:
+('rect', $radius-rect),
+('circle', $radius-circle);
+
+$radio-circle-transition: all 0.25s ease;
+$radio-label-transition: color 0.25s ease;
+
 .pui-radio {
   display: inline-block;
   cursor: pointer;
   white-space: nowrap;
   padding: 0.4rem;
+
   &.pui-radio--is-border{
     border-width: 1px;
     border-style: solid;
@@ -131,14 +133,14 @@ $radio-label-transition: 'color 0.25s ease';
   .pui-radio__circle{
     display: inline-block;
     position: relative;
-    border-radius: 50%;
     width: 1rem;
     height: 1rem;
     margin-right: 4px;
     border-width: 1px;
     border-style: solid;
-    transition: #{$radio-circle-transition};
+    transition: $radio-circle-transition;
     vertical-align: top;
+
     &::after{
       content: '';
       position: absolute;
@@ -146,29 +148,31 @@ $radio-label-transition: 'color 0.25s ease';
       left: 50%;
       transform: translate(-50%,-50%);
       display: inline-block;
-      border-radius: 50%;
       width: 4px;
       height: 4px;
       background-color: #ffffff;
     }
 
-    &.pui-radio__circle--shape-rect{
-      border-radius: $radius-rect;
-      &::after{
-        border-radius: $radius-rect;
+    @each $radio-shape, $radius in $radio-shapes{
+      &.pui-radio__circle--shape-#{$radio-shape}{
+        border-radius: $radius;
+        &::after{
+          border-radius: $radius;
+        }
       }
     }
+
   }
 
   .pui-radio__label{
     vertical-align: top;
-    transition: #{$radio-label-transition};
+    transition: $radio-label-transition;
     display: inline-block;
     transform: translateY(-1px);
   }
 
-  @each $type, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $radio-hover-color in $radio-themes{
-    &.pui-radio--type-#{$type}{
+  @each $theme, $label-border-color, $circle-border-color, $circle-background-color, $circle-inner-background-color, $label-color, $label-selected-color, $radio-hover-color in $radio-themes{
+    &.pui-radio--theme-#{$theme}{
       border-color: #{$label-border-color};
       &:hover{
         .pui-radio__circle{
@@ -178,6 +182,7 @@ $radio-label-transition: 'color 0.25s ease';
           }
         }
       }
+
       .pui-radio__circle{
         border-color: #{$circle-border-color};
         &::after{
@@ -190,9 +195,14 @@ $radio-label-transition: 'color 0.25s ease';
           }
         }
       }
+
       .pui-radio__label{
         color: $label-color;
+        &.pui-radio__label--selected{
+          color: $label-selected-color;
+        }
       }
+
     }
   }
 
