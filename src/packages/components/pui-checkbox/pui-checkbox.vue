@@ -148,7 +148,7 @@ $checkbox-label-tranition: color 0.25s ease;
     &::after{
       content: '';
       position: absolute;
-      top: 40%;
+      top: 45%;
       left: 50%;
       width: 50%;
       height: 25%;

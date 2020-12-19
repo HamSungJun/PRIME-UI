@@ -1,9 +1,9 @@
-import PuiRadio from '../packages/components/pui-radio/pui-radio'
+import PuiCheckBox from '../packages/components/pui-checkbox/pui-checkbox'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'PRIME-UI/Radio',
-  component: PuiRadio,
+  title: 'PRIME-UI/CheckBox',
+  component: PuiCheckBox,
   argTypes: {
     theme: {
       control: {
@@ -24,10 +24,10 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { PuiRadio },
-  template: '<pui-radio v-bind="$props" @change="action" ></pui-radio>',
+  components: { PuiCheckBox },
+  template: '<pui-checkbox v-bind="$props" @change="action" ></pui-checkbox>',
   methods: {
-    action: action('Pui-Radio Changed.')
+    action: action('Pui-CheckBox Changed.')
   }
 })
 
