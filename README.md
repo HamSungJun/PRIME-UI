@@ -14,6 +14,8 @@
 
 - [CheckBox](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-checkbox)
 
+- [Slider](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-slider)
+
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)
 - [BootStrap-Vue](https://bootstrap-vue.org/)
