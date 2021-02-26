@@ -2,9 +2,17 @@
   <div id="app">
     <div class="box">
       <pui-slider
+        v-for="(theme, i) in ['dark','blue','green','orange','red','gray']"
+        :key="i"
+        :theme="theme"
         :border="true"
         :disabled="false"
         :use-step="true"
+        :min="1"
+        :max="100"
+        :value="25"
+        :use-throttle="true"
+        :use-wheel="true"
       >
       </pui-slider>
     </div>
