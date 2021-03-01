@@ -1,21 +1,7 @@
 <template>
   <div id="app">
-    <div class="box">
-      <pui-slider
-        v-for="(theme, i) in ['dark','blue','green','orange','red','gray']"
-        :key="i"
-        :theme="theme"
-        :border="true"
-        :disabled="false"
-        :use-step="true"
-        :min="1"
-        :max="100"
-        :value="25"
-        :use-throttle="true"
-        :use-wheel="true"
-      >
-      </pui-slider>
-    </div>
+    <button class="button" v-for="(placement, i) in placements" :key="i" @click="printMe">{{placement}}</button>
+
   </div>
 </template>
 
@@ -23,13 +9,31 @@
 
 export default {
   name: 'App',
+
   data () {
     return {
-
+      placements: [
+        'top-left',
+        'top-center',
+        'top-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right'
+      ]
     }
   },
+  mounted () {
+    console.log(this.$toast)
+  },
   methods: {
-
+    printMe () {
+      this.$toast.createToasts([
+        {
+          message: '프라임 UI 토스트를 생성하였습니다.',
+          type: 'warning'
+        }
+      ])
+    }
   }
 }
 </script>
@@ -42,9 +46,12 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  .box{
-    width: 500px;
-    height: 60px;
+  .button{
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    border: 1px solid #ccc;
+    cursor: pointer;
   }
 }
 </style>
