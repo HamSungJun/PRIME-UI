@@ -23,5 +23,4 @@ pnpm-debug.log*
 
 # 스토리북 배포 파일
 storybook-static
-
 package-lock.json
