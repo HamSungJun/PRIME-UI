@@ -23,24 +23,39 @@ export default {
   data () {
     return {
       isVisible: false,
-      top: this.toastProps.top,
-      left: this.toastProps.left,
       translateY: 0
     }
   },
   computed: {
     toastStyle () {
-      return {
-        top: this.top + 'px',
-        left: this.left + 'px',
-        width: this.toastProps.width,
-        visibility: this.isVisible ? 'visible' : 'hidden',
-        transform: `translateY(${this.translateY}px)`
+      const { width, direction, y, x } = this.toastProps
+      const [directionY, directionX] = direction.split('-')
+      const style = {
+        width,
+        transform: `translate(0px, ${this.translateY}px)`
       }
+      switch (directionY) {
+        case 'top':
+          style.top = `${y}px`
+          break
+        case 'bottom':
+          style.bottom = `${y}px`
+          break
+      }
+      switch (directionX) {
+        case 'left':
+          style.left = `${x}px`
+          break
+        case 'center':
+          style.left = '50%'
+          style.transform = `translate(-50%, ${this.translateY}px)`
+          break
+        case 'right':
+          style.right = `${x}px`
+          break
+      }
+      return style
     }
-  },
-  mounted () {
-
   },
   methods: {
     startLife () {
@@ -48,18 +63,22 @@ export default {
       setTimeout(this.endLife, this.toastProps.lifeTime)
     },
     endLife () {
-      this.$el.addEventListener('transitionend', () => {
-        this.controllerRef.deleteToast(this._uid)
-        this.$el.remove()
-        this.$destroy()
-      })
+      this.$el.addEventListener('transitionend', this.onEndLife)
       this.isVisible = false
     },
     getScrollHeight () {
       return this.$el.scrollHeight
     },
-    move (diff) {
-      this.translateY += (diff + this.toastProps.distance)
+    move (diff, direction) {
+      return new Promise(resolve => {
+        this.$el.addEventListener('transitionend', resolve)
+        this.translateY += (diff + this.toastProps.distance) * (direction.startsWith('top') ? 1 : -1)
+      })
+    },
+    onEndLife () {
+      this.controllerRef.deleteToast(this._uid)
+      this.$el.remove()
+      this.$destroy()
     }
   }
 }

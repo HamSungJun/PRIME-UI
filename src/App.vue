@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <button class="button" v-for="(placement, i) in placements" :key="i" @click="printMe">{{placement}}</button>
+    <button class="button" v-for="(placement, i) in placements" :key="i" @click="printMe(placement)">{{placement}}</button>
 
   </div>
 </template>
@@ -9,7 +9,6 @@
 
 export default {
   name: 'App',
-
   data () {
     return {
       placements: [
@@ -23,14 +22,29 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$toast)
   },
   methods: {
-    printMe () {
+    printMe (direction) {
       this.$toast.createToasts([
         {
           message: '프라임 UI 토스트를 생성하였습니다.',
-          type: 'warning'
+          type: 'warning',
+          direction
+        },
+        {
+          message: '프라임 UI 토스트를 생성하였습니다.',
+          type: 'success',
+          direction
+        },
+        {
+          message: '프라임 UI 토스트를 생성하였습니다.',
+          type: 'info',
+          direction
+        },
+        {
+          message: '프라임 UI 토스트를 생성하였습니다.',
+          type: 'error',
+          direction
         }
       ])
     }
