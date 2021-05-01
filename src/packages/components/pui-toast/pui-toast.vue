@@ -1,6 +1,14 @@
 <template>
-    <div>
-        <button class="toast-button" v-for="direction in directions" :key="direction" @click="showToast(direction)">{{direction}}</button>
+    <div class="wrapper">
+        <pui-button
+          v-for="direction in directions"
+          :key="direction"
+          :type="'primary'"
+          outline
+          @click="showToast(direction)"
+        >
+          {{direction}}
+        </pui-button>
     </div>
 </template>
 <script>
@@ -60,18 +68,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.toast-button{
-    display: block;
-    width: 50%;
-    margin: 0 auto;
-    border: 1px dashed #ccc;
-    height: 50px;
-    cursor: pointer;
-    &:not(:last-child){
-        margin-bottom: 10px;
-    }
-    &:hover{
-        background-color: lightgoldenrodyellow;
-    }
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
 }
 </style>
