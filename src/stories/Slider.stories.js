@@ -2,7 +2,7 @@ import PuiSlider from '../packages/components/pui-slider/pui-slider'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'PRIME-UI/Slider',
+  title: 'PRIME-UI/Components/Slider',
   component: PuiSlider,
   argTypes: {
     theme: {

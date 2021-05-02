@@ -2,7 +2,7 @@ import PuiCheckBox from '../packages/components/pui-checkbox/pui-checkbox'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'PRIME-UI/CheckBox',
+  title: 'PRIME-UI/Components/CheckBox',
   component: PuiCheckBox,
   argTypes: {
     theme: {

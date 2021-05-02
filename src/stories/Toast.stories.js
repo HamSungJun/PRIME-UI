@@ -1,7 +1,7 @@
 import PuiToast from '../packages/components/pui-toast/pui-toast'
 
 export default {
-  title: 'PRIME-UI/Toast',
+  title: 'PRIME-UI/Prototypes/Toast',
   component: PuiToast
 }
 

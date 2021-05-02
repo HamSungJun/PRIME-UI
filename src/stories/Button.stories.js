@@ -2,7 +2,7 @@ import PuiButton from '../packages/components/pui-button/pui-button'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'PRIME-UI/Button',
+  title: 'PRIME-UI/Components/Button',
   component: PuiButton,
   argTypes: {
     type: {

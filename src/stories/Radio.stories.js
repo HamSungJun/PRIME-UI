@@ -2,7 +2,7 @@ import PuiRadio from '../packages/components/pui-radio/pui-radio'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'PRIME-UI/Radio',
+  title: 'PRIME-UI/Components/Radio',
   component: PuiRadio,
   argTypes: {
     theme: {

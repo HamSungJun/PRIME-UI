@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <button class="button" v-for="(placement, i) in placements" :key="i" @click="printMe(placement)">{{placement}}</button>
-
+    <pui-modal-container />
+    <button @click="createModal">create</button>
   </div>
 </template>
 
 <script>
-
+import Sample from '@/packages/components/Sample.vue'
 export default {
   name: 'App',
+  component: {
+    Sample
+  },
   data () {
     return {
       placements: [
@@ -24,29 +27,10 @@ export default {
   mounted () {
   },
   methods: {
-    printMe (direction) {
-      this.$toast.createToasts([
-        {
-          message: '프라임 UI 토스트를 생성하였습니다.',
-          type: 'warning',
-          direction
-        },
-        {
-          message: '프라임 UI 토스트를 생성하였습니다.',
-          type: 'success',
-          direction
-        },
-        {
-          message: '프라임 UI 토스트를 생성하였습니다.',
-          type: 'info',
-          direction
-        },
-        {
-          message: '프라임 UI 토스트를 생성하였습니다.',
-          type: 'error',
-          direction
-        }
-      ])
+    createModal () {
+      this.$modal.show({
+        modalComp: Sample
+      })
     }
   }
 }

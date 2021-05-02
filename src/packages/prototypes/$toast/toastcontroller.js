@@ -14,9 +14,9 @@ function ToastController () {
   this.toastOptions = {
     y: 5,
     x: 5,
-    width: '500px',
+    width: '50%',
     type: 'success',
-    lifeTime: 2000,
+    lifeTime: 3000,
     distance: 5,
     direction: 'top-left'
   }
