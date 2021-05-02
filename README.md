@@ -21,6 +21,8 @@
 - Prototypes
 
   - [Toast](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$toast)
+  
+  - [Modal](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$modal)
 
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)
