@@ -18,6 +18,8 @@
 
   - [Slider](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-slider)
 
+  - [TreeView](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/components/pui-treeview)
+
 - Prototypes
 
   - [Toast](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$toast)
