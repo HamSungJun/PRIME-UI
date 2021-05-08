@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <pui-modal-container />
-    <button @click="createModal">create</button>
+    <pui-treeview :treeData="treeData" />
   </div>
 </template>
 
@@ -14,24 +13,39 @@ export default {
   },
   data () {
     return {
-      placements: [
-        'top-left',
-        'top-center',
-        'top-right',
-        'bottom-left',
-        'bottom-center',
-        'bottom-right'
-      ]
+      treeData: {
+        id: 0,
+        name: 'new node',
+        children: [
+          {
+            id: 1,
+            name: 'new node',
+            children: [
+              {
+                id: 3,
+                name: 'new node',
+                children: []
+              },
+              {
+                id: 4,
+                name: 'new node',
+                children: []
+              }
+            ]
+          },
+          {
+            id: 2,
+            name: 'new node',
+            children: []
+          }
+        ]
+      }
     }
   },
   mounted () {
   },
   methods: {
-    createModal () {
-      this.$modal.show({
-        modalComp: Sample
-      })
-    }
+
   }
 }
 </script>
