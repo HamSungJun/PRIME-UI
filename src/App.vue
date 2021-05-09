@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <pui-treeview :treeData="treeData" />
+    <div class="box">
+      <pui-treeview
+        :tree-data="treeData"
+        :tree-level-gap="20"
+        @click="onClick"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,7 +51,9 @@ export default {
   mounted () {
   },
   methods: {
-
+    onClick (event) {
+      console.log(event)
+    }
   }
 }
 </script>
@@ -64,6 +72,13 @@ export default {
     height: 50px;
     border: 1px solid #ccc;
     cursor: pointer;
+  }
+  .box{
+    border: 1px dashed #ccc;
+    width: 600px;
+    height: 1000px;
+    overflow: auto;
+    padding: 20px;
   }
 }
 </style>
