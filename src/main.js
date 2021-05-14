@@ -5,14 +5,18 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faTrashAlt,
+  faCaretDown,
   faPencilAlt,
+  faPlusCircle,
   faGripVertical,
   faArrowCircleUp
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faTrashAlt,
+  faCaretDown,
   faPencilAlt,
+  faPlusCircle,
   faGripVertical,
   faArrowCircleUp
 )

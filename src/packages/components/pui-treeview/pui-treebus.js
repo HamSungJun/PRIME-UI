@@ -8,6 +8,7 @@ export const PUI_TREE_BUS = function () {
         nodeFunctionSet: new Set([
           'pui-tree-node-create-before',
           'pui-tree-node-create-after',
+          'pui-tree-node-append',
           'pui-tree-node-remove',
           'pui-tree-node-update'
         ])
@@ -40,8 +41,16 @@ export const PUI_TREE_BUS = function () {
           this.createNode({ nodeName })
         )
       },
-      onRemove () {
-
+      onAppend ({ currentNode, nodeName }) {
+        currentNode.children.push(this.createNode({ nodeName }))
+      },
+      onRemove ({ parentNode, currentNode }) {
+        if (!parentNode) return
+        const currentNodeIndex = parentNode.children.findIndex(node => node === currentNode)
+        parentNode.children.splice(
+          currentNodeIndex,
+          1
+        )
       },
       onUpdate () {
 
