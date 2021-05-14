@@ -3,9 +3,11 @@
         <pui-treenode
             :tree-bus="treeBus"
             :tree-data="treeData"
+            :tree-data-parent="treeDataParent"
             :tree-level="treeLevel"
             :tree-max-level="treeMaxLevel"
             :tree-level-gap="treeLevelGap"
+            :tree-node-default-name="treeNodeDefaultName"
             :tree-node-create-before="treeNodeCreateBefore"
             :tree-node-create-after="treeNodeCreateAfter"
             :tree-node-remove="treeNodeRemove"
@@ -92,6 +94,11 @@ export default {
     treeNodeMove: {
       type: Boolean,
       default: true,
+      required: false
+    },
+    treeNodeDefaultName: {
+      type: String,
+      default: 'New Node',
       required: false
     }
   },

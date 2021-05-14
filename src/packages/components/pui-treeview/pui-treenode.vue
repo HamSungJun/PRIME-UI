@@ -23,7 +23,9 @@
             'pui-tree-node__item-function-icon',
           ]"
         >
-          Insert Before
+          <font-awesome-icon
+            :icon="['fas', 'arrow-circle-up']"
+          />
         </span>
         <span
           v-if="treeNodeCreateAfter"
@@ -33,7 +35,10 @@
             'pui-tree-node__item-function-icon',
           ]"
         >
-          Insert After
+          <font-awesome-icon
+            :icon="['fas', 'arrow-circle-up']"
+            rotation="180"
+          />
         </span>
         <span
           v-if="treeNodeRemove"
@@ -43,7 +48,9 @@
             'pui-tree-node__item-function-icon',
           ]"
         >
-          Remove
+          <font-awesome-icon
+            :icon="['fas', 'trash-alt']"
+          />
         </span>
         <span
           v-if="treeNodeUpdate"
@@ -53,7 +60,9 @@
             'pui-tree-node__item-function-icon',
           ]"
         >
-          Edit
+          <font-awesome-icon
+            :icon="['fas', 'pencil-alt']"
+          />
         </span>
         <span
           v-if="treeNodeMove"
@@ -63,8 +72,11 @@
             'pui-tree-node__item-function-icon',
             'pui-tree-node__item-function-icon--handle',
           ]"
+          ref="node-handle"
         >
-          Move
+          <font-awesome-icon
+            :icon="['fas', 'grip-vertical']"
+          />
         </span>
     </div>
 </template>
@@ -79,6 +91,15 @@ export default {
     },
     treeData: {
       type: Object,
+      required: true
+    },
+    treeDataParent: {
+      type: [Object, null],
+      default: () => null,
+      required: false
+    },
+    treeNodeDefaultName: {
+      type: String,
       required: true
     },
     treeLevel: {
@@ -116,12 +137,6 @@ export default {
   },
   data () {
     return {
-      nodeFunctions: [
-        'insert-before',
-        'insert-after',
-        'remove',
-        'update'
-      ]
     }
   },
   computed: {
@@ -140,7 +155,7 @@ export default {
   },
   methods: {
     onMouseDown (event) {
-      if (!event.target.classList.contains('pui-tree-node-move')) {
+      if (!event.target.closest('.pui-tree-node__item-function-icon--handle')) {
         event.preventDefault()
       }
       return true
@@ -148,7 +163,21 @@ export default {
     onNodeClick (event) {
       const functionClass = event.target.classList.item(0)
       if (this.treeBus.nodeFunctionSet.has(functionClass)) {
-
+        console.log(functionClass)
+        switch (functionClass) {
+          case 'pui-tree-node-create-before':
+            return this.treeBus.onCreateBefore({
+              parentNode: this.treeDataParent,
+              currentNode: this.treeData,
+              nodeName: this.treeNodeDefaultName
+            })
+          case 'pui-tree-node-create-after':
+            return this.treeBus.onCreateAfter({
+              parentNode: this.treeDataParent,
+              currentNode: this.treeData,
+              nodeName: this.treeNodeDefaultName
+            })
+        }
       }
     }
   }
@@ -167,23 +196,24 @@ export default {
   }
   &__item{
     &-name{
-    font-size: 1.25rem;
+      font-size: 1.25rem;
+      margin-right: auto;
     }
     &-function-icon{
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
-      font-size: 0.75rem;
+      font-size: 1.15rem;
       text-decoration: underline;
       cursor: pointer;
       padding: 0 10px;
+      color: rgba(40,40,40,0.5);
+      transition: color 0.25s ease;
       &:hover{
-        background: #ccc;
+        color: rgb(30,30,30);
+        background-color: rgba(220,220,220,0.75);
       }
-    }
-    &--handle{
-      margin-left: auto;
     }
   }
 }
