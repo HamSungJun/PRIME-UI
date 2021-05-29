@@ -10,8 +10,10 @@ export const PUI_TREE_BUS = function () {
           'pui-tree-node-create-after',
           'pui-tree-node-append',
           'pui-tree-node-remove',
-          'pui-tree-node-update'
-        ])
+          'pui-tree-node-update',
+          'pui-tree-node-update-end'
+        ]),
+        dragNode: null
       }
     },
     methods: {
@@ -24,7 +26,6 @@ export const PUI_TREE_BUS = function () {
       },
       onCreateBefore ({ parentNode, currentNode, nodeName }) {
         if (!parentNode) return
-        console.log(parentNode, currentNode, nodeName)
         const currentNodeIndex = parentNode.children.findIndex(node => node === currentNode)
         parentNode.children.splice(
           currentNodeIndex === 0 ? 0 : currentNodeIndex - 1,
@@ -52,8 +53,33 @@ export const PUI_TREE_BUS = function () {
           1
         )
       },
-      onUpdate () {
-
+      onUpdate ({ currentNode, name }) {
+        currentNode.name = name
+      },
+      onDragStart ({ dragNode }) {
+        this.dragNode = dragNode
+        this.$emit('drag-start', { dragNode })
+      },
+      onDragEnd () {
+        this.dragNode = null
+        this.$emit('drag-end')
+      },
+      checkDroppable ({ dropNode }) {
+        console.log()
+        if (this.isDragNodeParentOfDropNode({ dragNode: this.dragNode, dropNode })) {
+          return false
+        }
+        return true
+      },
+      isDragNodeParentOfDropNode ({ dragNode, dropNode }) {
+        let nextParent = dropNode.$parent
+        while (nextParent) {
+          if (dragNode.$parent === nextParent) {
+            return true
+          }
+          nextParent = nextParent.$parent
+        }
+        return false
       }
     }
   })

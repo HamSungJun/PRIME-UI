@@ -24,6 +24,7 @@
               :tree-bus="treeBus"
               :tree-data="_treeData"
               :tree-data-parent="treeData"
+              :tree-fold="treeFold"
               :tree-level="treeLevel + 1"
               :tree-max-level="treeMaxLevel"
               :tree-level-gap="treeLevelGap"

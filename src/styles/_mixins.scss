@@ -7,4 +7,12 @@
     opacity: 0.60;
     pointer-events: none;
 }
-
+/**
+ * text-ellipsis
+ * 텍스트의 길이가 요소 너비를 넘어서는 경우 말줄임을 표시하기 위한 믹스인 함수
+ */
+@mixin text-ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

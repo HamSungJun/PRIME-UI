@@ -4,6 +4,7 @@ import PrimeUI from './packages'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
+  faCheck,
   faTrashAlt,
   faCaretDown,
   faPencilAlt,
@@ -13,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
+  faCheck,
   faTrashAlt,
   faCaretDown,
   faPencilAlt,

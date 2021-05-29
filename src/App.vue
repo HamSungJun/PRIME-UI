@@ -4,6 +4,7 @@
       <pui-treeview
         :tree-data="treeData"
         :tree-level-gap="20"
+        :tree-fold="false"
         @click="onClick"
       />
     </div>
