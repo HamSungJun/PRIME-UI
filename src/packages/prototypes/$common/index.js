@@ -2,13 +2,13 @@ import {
   PUI_DEFAULT_THROTTLE_FREQUENCY,
   PUI_DEFAULT_DEBOUNCE_DURATION
 } from '../../constants'
-
+import { placeAt } from './placer'
 /*
  * wrapThrottle: 특정 함수를 빠른 주기로 실행하더라도 정해진 주기내에서 실행하도록 하는 클로저 팩토리 함수.
  * @param {Function} fn
  * @param {Number} frequency
  */
-function wrapThrottle (fn, frequency = PUI_DEFAULT_THROTTLE_FREQUENCY) {
+export function wrapThrottle (fn, frequency = PUI_DEFAULT_THROTTLE_FREQUENCY) {
   const freq = (1000 / frequency)
   let timerId = null
   return (...args) => {
@@ -26,7 +26,7 @@ function wrapThrottle (fn, frequency = PUI_DEFAULT_THROTTLE_FREQUENCY) {
  * @param {Function} fn
  * @param {Number} duration
  */
-function wrapDebounce (fn, duration = PUI_DEFAULT_DEBOUNCE_DURATION) {
+export function wrapDebounce (fn, duration = PUI_DEFAULT_DEBOUNCE_DURATION) {
   let timerId = null
   return (...args) => {
     if (timerId) clearTimeout(timerId)
@@ -40,6 +40,6 @@ function wrapDebounce (fn, duration = PUI_DEFAULT_DEBOUNCE_DURATION) {
 export default {
   name: '$common',
   install (Vue, options = {}) {
-    Vue.prototype.$common = { wrapThrottle, wrapDebounce }
+    Vue.prototype.$common = { wrapThrottle, wrapDebounce, placeAt }
   }
 }
