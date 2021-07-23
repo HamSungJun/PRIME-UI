@@ -3,7 +3,7 @@ import {
   PUI_DEFAULT_DEBOUNCE_DURATION
 } from '../../constants'
 import { placeAt } from './placer'
-/*
+/**
  * wrapThrottle: 특정 함수를 빠른 주기로 실행하더라도 정해진 주기내에서 실행하도록 하는 클로저 팩토리 함수.
  * @param {Function} fn
  * @param {Number} frequency
@@ -21,7 +21,7 @@ export function wrapThrottle (fn, frequency = PUI_DEFAULT_THROTTLE_FREQUENCY) {
   }
 }
 
-/*
+/**
  * wrapDebounce: 특정 함수를 빠른 주기로 실행하더라도 특정 시간내의 호출은 무시하고 마지막의 호출을 실행하도록 하는 클로저 팩토리 함수.
  * @param {Function} fn
  * @param {Number} duration
