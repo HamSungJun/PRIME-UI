@@ -25,6 +25,8 @@
   - [Toast](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$toast)
   
   - [Modal](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$modal)
+  
+  - [Placer](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$common/placer)
 
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)
