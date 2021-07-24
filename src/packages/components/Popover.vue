@@ -1,0 +1,42 @@
+<template>
+  <div class="pui-popover-sample">
+      <div class="pui-popover-header">
+          <h1>This is Sample.</h1>
+      </div>
+      <div class="pui-popover-body">
+          <pui-button :type="'primary'" outline @click="onClose">close</pui-button>
+          <pui-button :type="'primary'" outline @click="onCloseAll">closeAll</pui-button>
+      </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'popover',
+  methods: {
+    onClose () {
+      this.$emit('close')
+    },
+    onCloseAll () {
+      this.$emit('close-all')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .pui-popover-sample{
+    width: 200px;
+    height: 200px;
+    border: 2px dashed cornflowerblue;
+    .pui-popover-header{
+      text-align: center;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    .pui-popover-body{
+
+    }
+  }
+</style>

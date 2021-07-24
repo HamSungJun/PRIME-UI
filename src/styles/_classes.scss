@@ -9,3 +9,10 @@
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
 }
+
+.animate-fade-in{
+  @include animation-props(fadeIn);
+}
+.animate-fade-out{
+  @include animation-props(fadeOut);
+}

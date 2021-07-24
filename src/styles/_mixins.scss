@@ -16,3 +16,23 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+@mixin animation-props ($name, $timing: linear, $delay: 0, $iter: 1, $direction: forwards, $fill: none) {
+    -moz-animation-name: $name;
+    -moz-animation-timing-function: $timing;
+    -moz-animation-delay: $delay;
+    -moz-animation-iteration-count: $iter;
+    -moz-animation-direction: $direction;
+    -webkit-animation-name: $name;
+    -webkit-animation-timing-function: $timing;
+    -webkit-animation-delay: $delay;
+    -webkit-animation-iteration-count: $iter;
+    -webkit-animation-direction: $direction;
+    -webkit-animation-fill-mode: $fill;
+    animation-name: $name;
+    animation-timing-function: $timing;
+    animation-delay: $delay;
+    animation-iteration-count: $iter;
+    animation-direction: $direction;
+    animation-fill-mode: $fill;
+}
