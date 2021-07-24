@@ -27,7 +27,7 @@
   - [Modal](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$modal)
   
   - [Placer](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$common/placer)
-
+  - [Popover](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$popover)
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)
 - [BootStrap-Vue](https://bootstrap-vue.org/)
