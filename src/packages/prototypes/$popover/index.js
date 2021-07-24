@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import PuiPopover from './pui-popover.vue'
 import PuiPopoverContainer from './pui-popover-container.vue'
+import { PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX, PUI_DEFAULT_POPOVER_MAX_ROTATE_ID } from '../../constants'
 
 const PUI_DEFAULT_POPOVER_OPTIONS = Object.create(null)
 Object.defineProperties(PUI_DEFAULT_POPOVER_OPTIONS, {
-  distance: { value: 5, writable: true, configurable: false, enumerable: true },
+  distance: { value: 20, writable: true, configurable: false, enumerable: true },
   placement: { value: 'Top-Center', writable: true, configurable: false, enumerable: true },
   useArrow: { value: false, writable: true, configurable: false, enumerable: true },
   useAnimation: { value: true, writable: true, configurable: false, enumerable: true },
@@ -59,7 +60,25 @@ export default {
     }
     Object.freeze(PUI_DEFAULT_POPOVER_OPTIONS)
     Vue.component('pui-popover', PuiPopover)
-    Vue.component('pui-popover-container', PuiPopoverContainer)
+    Vue.component('pui-popover-container', Object.assign({}, PuiPopoverContainer, {
+      props: {
+        zIndex: {
+          type: Number,
+          required: false,
+          default: PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX
+        },
+        defaultPopoverOptions: {
+          type: Object,
+          required: false,
+          default: () => PUI_DEFAULT_POPOVER_OPTIONS
+        },
+        defaultMaxRotateId: {
+          type: Number,
+          required: false,
+          default: PUI_DEFAULT_POPOVER_MAX_ROTATE_ID
+        }
+      }
+    }))
     Vue.prototype.$popover = { open, close, closeAll, PUI_POPOVER_BUS }
   }
 }

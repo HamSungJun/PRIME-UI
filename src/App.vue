@@ -1,28 +1,33 @@
 <template>
   <div id="app">
     <pui-popover-container></pui-popover-container>
-    <button class="source" @click="onClick">click</button>
+    <button v-for="(p,i) in placements" :key="i" class="source" @mouseenter="onClick($event,p)" @mouseleave="onLeave">{{p}}</button>
   </div>
 </template>
 
 <script>
 import Popover from '@/packages/components/Popover.vue'
-
+import { PUI_VALID_PLACEMENTS } from './packages/constants'
 export default {
   name: 'App',
   data () {
     return {
+      placements: [...PUI_VALID_PLACEMENTS]
     }
   },
   methods: {
-    onClick (event) {
+    onClick (event, placement) {
       this.$popover.open({
         source: event.target,
         popoverComp: Popover,
         popoverOptions: {
-          placement: 'Bottom-Center'
+          placement,
+          animationDuration: 0.35
         }
       })
+    },
+    onLeave (event) {
+      this.$popover.closeAll()
     }
   }
 }
@@ -35,6 +40,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   .button{
     display: inline-block;
     width: 100px;
@@ -53,9 +59,6 @@ export default {
     border: 1px dashed blue;
     width: 100px;
     height: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     transform: translate(-50%,-50%);
   }
   .target {

@@ -5,7 +5,7 @@ import { PUI_VALID_PLACEMENTS } from '../../../constants'
  * @param {HTMLElement} target 뷰포트 상에서 기준점으로 이용할 엘리먼트의 특정 방향에 배치시킬 엘리먼트
  * @returns 배치할 엘리먼트가 뷰포트와 충돌시 입은 픽셀 손해량, 특정 방향에 배치할 경우 top, left 값 {damage: number, top: number, left: number}
  */
-export const placeAt = ({ source = null, target = null, placement = '' } = {}) => {
+export const placeAt = ({ source = null, target = null, placement = '', distance = 0 } = {}) => {
   if (!placement || !PUI_VALID_PLACEMENTS.has(placement)) return null
   if ([source, target].some(el => !(el instanceof HTMLElement))) return null
   //* 좌표를 확인하는 함수는 ReFlow 연산에 대한 코스트를 부담하므로 계산하기전 변수에 담아 참조로 동작하도록 합니다.
@@ -13,26 +13,27 @@ export const placeAt = ({ source = null, target = null, placement = '' } = {}) =
   const windowIHeight = window.innerHeight
   const sourceRect = source.getBoundingClientRect()
   const targetRect = target.getBoundingClientRect()
+  const operands = { windowIWidth, windowIHeight, sourceRect, targetRect, distance }
   switch (placement) {
-    case 'Top-Start': return placeAtTopStart({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Top-Center': return placeAtTopCenter({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Top-End': return placeAtTopEnd({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Bottom-Start': return placeAtBottomStart({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Bottom-Center': return placeAtBottomCenter({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Bottom-End': return placeAtBottomEnd({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Left-Start': return placeAtLeftStart({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Left-Center': return placeAtLeftCenter({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Left-End': return placeAtLeftEnd({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Right-Start': return placeAtRightStart({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Right-Center': return placeAtRightCenter({ windowIWidth, windowIHeight, sourceRect, targetRect })
-    case 'Right-End': return placeAtRightEnd({ windowIWidth, windowIHeight, sourceRect, targetRect })
+    case 'Top-Start': return placeAtTopStart(operands)
+    case 'Top-Center': return placeAtTopCenter(operands)
+    case 'Top-End': return placeAtTopEnd(operands)
+    case 'Bottom-Start': return placeAtBottomStart(operands)
+    case 'Bottom-Center': return placeAtBottomCenter(operands)
+    case 'Bottom-End': return placeAtBottomEnd(operands)
+    case 'Left-Start': return placeAtLeftStart(operands)
+    case 'Left-Center': return placeAtLeftCenter(operands)
+    case 'Left-End': return placeAtLeftEnd(operands)
+    case 'Right-Start': return placeAtRightStart(operands)
+    case 'Right-Center': return placeAtRightCenter(operands)
+    case 'Right-End': return placeAtRightEnd(operands)
     default: return null
   }
 }
 
-export const placeAtTopStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtTopStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.top - targetRect.height
+  const top = sourceRect.top - targetRect.height - distance
   const left = sourceRect.left - targetRect.width
   const right = sourceRect.left
   const bottom = sourceRect.top
@@ -45,9 +46,9 @@ export const placeAtTopStart = ({ windowIWidth, windowIHeight, sourceRect, targe
   return setReturn(returnForm)
 }
 
-export const placeAtTopCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtTopCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.top - targetRect.height
+  const top = sourceRect.top - targetRect.height - distance
   const left = sourceRect.left + (sourceRect.width / 2) - (targetRect.width / 2)
   const right = left + targetRect.width
   const bottom = sourceRect.top
@@ -59,9 +60,9 @@ export const placeAtTopCenter = ({ windowIWidth, windowIHeight, sourceRect, targ
   }
   return setReturn(returnForm)
 }
-export const placeAtTopEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtTopEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.top - targetRect.height
+  const top = sourceRect.top - targetRect.height - distance
   const left = sourceRect.right
   const right = left + targetRect.width
   const bottom = sourceRect.top
@@ -74,9 +75,9 @@ export const placeAtTopEnd = ({ windowIWidth, windowIHeight, sourceRect, targetR
   return setReturn(returnForm)
 }
 
-export const placeAtBottomStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtBottomStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.bottom
+  const top = sourceRect.bottom + distance
   const left = sourceRect.left - targetRect.width
   const right = left + targetRect.width
   const bottom = top + targetRect.height
@@ -88,9 +89,9 @@ export const placeAtBottomStart = ({ windowIWidth, windowIHeight, sourceRect, ta
   }
   return setReturn(returnForm)
 }
-export const placeAtBottomCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtBottomCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.bottom
+  const top = sourceRect.bottom + distance
   const left = sourceRect.left + (sourceRect.width / 2) - (targetRect.width / 2)
   const right = left + targetRect.width
   const bottom = top + targetRect.height
@@ -102,9 +103,9 @@ export const placeAtBottomCenter = ({ windowIWidth, windowIHeight, sourceRect, t
   }
   return setReturn(returnForm)
 }
-export const placeAtBottomEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtBottomEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
-  const top = sourceRect.bottom
+  const top = sourceRect.bottom + distance
   const left = sourceRect.right
   const right = left + targetRect.width
   const bottom = top + targetRect.height
@@ -117,10 +118,10 @@ export const placeAtBottomEnd = ({ windowIWidth, windowIHeight, sourceRect, targ
   return setReturn(returnForm)
 }
 
-export const placeAtLeftStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtLeftStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.top
-  const left = sourceRect.left - targetRect.width
+  const left = sourceRect.left - targetRect.width - distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }
@@ -131,10 +132,10 @@ export const placeAtLeftStart = ({ windowIWidth, windowIHeight, sourceRect, targ
   }
   return setReturn(returnForm)
 }
-export const placeAtLeftCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtLeftCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.top + (sourceRect.height / 2) - (targetRect.height / 2)
-  const left = sourceRect.left - targetRect.width
+  const left = sourceRect.left - targetRect.width - distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }
@@ -145,10 +146,10 @@ export const placeAtLeftCenter = ({ windowIWidth, windowIHeight, sourceRect, tar
   }
   return setReturn(returnForm)
 }
-export const placeAtLeftEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtLeftEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.bottom - targetRect.height
-  const left = sourceRect.left - targetRect.width
+  const left = sourceRect.left - targetRect.width - distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }
@@ -160,10 +161,10 @@ export const placeAtLeftEnd = ({ windowIWidth, windowIHeight, sourceRect, target
   return setReturn(returnForm)
 }
 
-export const placeAtRightStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtRightStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.top
-  const left = sourceRect.right
+  const left = sourceRect.right + distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }
@@ -174,10 +175,10 @@ export const placeAtRightStart = ({ windowIWidth, windowIHeight, sourceRect, tar
   }
   return setReturn(returnForm)
 }
-export const placeAtRightCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtRightCenter = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.top + (sourceRect.height / 2) - (targetRect.height / 2)
-  const left = sourceRect.right
+  const left = sourceRect.right + distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }
@@ -188,10 +189,10 @@ export const placeAtRightCenter = ({ windowIWidth, windowIHeight, sourceRect, ta
   }
   return setReturn(returnForm)
 }
-export const placeAtRightEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect }) => {
+export const placeAtRightEnd = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
   const targetArea = (targetRect.height * targetRect.width)
   const top = sourceRect.bottom - targetRect.height
-  const left = sourceRect.right
+  const left = sourceRect.right + distance
   const right = left + targetRect.width
   const bottom = top + targetRect.height
   const operands = { targetArea, top, left, right, bottom, windowIWidth, windowIHeight }

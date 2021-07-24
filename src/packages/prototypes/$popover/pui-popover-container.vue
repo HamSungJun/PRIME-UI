@@ -6,21 +6,16 @@
         v-bind="popoverRef"
         @close="onClose"
         @close-all="onCloseAll"
+        ref="pui-popover"
       >
       </pui-popover>
   </div>
 </template>
 
 <script>
-import { PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX } from '../../constants'
+
 export default {
   name: 'pui-popover-container',
-  props: {
-    zIndex: {
-      type: Number,
-      default: PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX
-    }
-  },
   data () {
     return {
       popoverRefs: [],
@@ -44,10 +39,10 @@ export default {
     onOpen (popoverParams) {
       const { useStack } = popoverParams.popoverOptions
       if (!useStack) {
-        this.clearPopovers()
+        this.onCloseAll()
       }
       popoverParams.popoverId = this.nextPopoverId
-      this.nextPopoverId += 1
+      this.nextPopoverId = (this.nextPopoverId + 1) % this.defaultMaxRotateId
       this.popoverRefs.push(popoverParams)
     },
     onClose ({ popoverId }) {
@@ -57,11 +52,9 @@ export default {
       )
     },
     onCloseAll () {
-      this.clearPopovers()
-    },
-    clearPopovers () {
-      this.popoverRefs = []
-      this.nextPopoverId = 0
+      (this.$refs['pui-popover'] || []).forEach(popoverComponent => {
+        popoverComponent.onClose()
+      })
     }
   }
 }

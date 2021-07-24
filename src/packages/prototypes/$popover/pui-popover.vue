@@ -49,6 +49,7 @@ export default {
   },
   data () {
     return {
+      layerEl: null,
       layerTop: 0,
       layerLeft: 0,
       isAppearing: true,
@@ -67,41 +68,38 @@ export default {
       }
     },
     layerAnimation () {
-      const { isAppearing } = this
+      const { isAppearing, isComponentVisible } = this
       const { animationName } = this.popoverOptions
-      return `layer-${animationName}-${isAppearing ? 'in' : 'out'}`
+      return isComponentVisible ? `layer-${animationName}-${isAppearing ? 'in' : 'out'}` : ''
     }
   },
-  mounted () {
+  async mounted () {
     //* $nextTick() 함수를 통해 동적 컴포넌트의 Layout 페이즈를 완료한 후 위치 계산을 시작합니다.
-    this.$nextTick(() => {
-      const source = this.source
-      const target = this.$refs['pui-popover-target'].$el
-      const placement = this.popoverOptions.placement
-      const { damage, top, left } = this.$common.placeAt({ source, target, placement })
-      console.log(damage, top, left)
-      this.layerTop = top
-      this.layerLeft = left
-      this.isComponentVisible = true
-      if ('after-open' in this.popoverHandlers) {
-        this.popoverHandlers['after-open']()
-      }
-    })
+    await this.$nextTick()
+    this.layerEl = this.$refs['pui-popover-layer']
+    const source = this.source
+    const target = this.$refs['pui-popover-target'].$el
+    const { placement, distance } = this.popoverOptions
+    const { damage, top, left } = this.$common.placeAt({ source, target, placement, distance })
+    console.log(damage, top, left)
+    this.layerTop = top
+    this.layerLeft = left
+    this.isAppearing = true
+    this.isComponentVisible = true
+    this.onAfterOpen()
   },
   destroyed () {
-    if ('after-close' in this.popoverHandlers) {
-      this.popoverHandlers['after-close']()
-    }
+    this.onAfterClose()
   },
   methods: {
     onClose () {
       const { useAnimation } = this.popoverOptions
       if (useAnimation) {
         this.$refs['pui-popover-layer'].addEventListener('animationend', this.onCloseEnd)
+        this.isAppearing = false
       } else {
         this.onCloseEnd()
       }
-      this.isAppearing = false
     },
     onCloseEnd () {
       this.isComponentVisible = false
@@ -109,19 +107,32 @@ export default {
     },
     onCloseAll () {
       this.$emit('close-all')
+    },
+    onAfterOpen () {
+      if ('after-open' in this.popoverHandlers) {
+        this.popoverHandlers['after-open']()
+      }
+    },
+    onAfterClose () {
+      if ('after-close' in this.popoverHandlers) {
+        this.popoverHandlers['after-close']()
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$popover-animation-names: 'fade';
 .pui-popover-layer{
   position: fixed;
-  &.layer-fade-in{
-    @include animation-props(fadeIn);
-  }
-  &.layer-fade-out{
-    @include animation-props(fadeOut);
+  @each $animationName in $popover-animation-names {
+    &.layer-#{$animationName}-in{
+      @include animation-props(#{$animationName}In);
+    }
+    &.layer-#{$animationName}-out{
+      @include animation-props(#{$animationName}Out);
+    }
   }
 }
 

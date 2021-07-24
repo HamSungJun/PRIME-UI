@@ -6,6 +6,8 @@ export const PUI_DEFAULT_MODAL_CONTAINER_ZINDEX = 2000
 
 export const PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX = 2000
 
+export const PUI_DEFAULT_POPOVER_MAX_ROTATE_ID = 50000
+
 export const PUI_VALID_PLACEMENTS = new Set([
   'Top-Start', 'Top-Center', 'Top-End',
   'Bottom-Start', 'Bottom-Center', 'Bottom-End',
