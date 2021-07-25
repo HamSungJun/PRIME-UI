@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'pui-popover-container',
   data () {
@@ -35,7 +34,24 @@ export default {
     this.$popover.PUI_POPOVER_BUS.$on('close', onClose)
     this.$popover.PUI_POPOVER_BUS.$on('close-all', onCloseAll)
   },
+  mounted () {
+    const { clickToClose, resizeToClose, scrollToClose } = this.defaultPopoverOptions
+    if (clickToClose) {
+      window.addEventListener('click', this.onWindowClick)
+    }
+    if (resizeToClose) {
+      this.onWindowResize = this.$common.wrapDebounce(this.onWindowResize, { duration: 250, initial: true })
+      window.addEventListener('resize', this.onWindowResize)
+    }
+    if (scrollToClose) {
+      this.onWindowScroll = this.$common.wrapDebounce(this.onWindowScroll, { duration: 250, initial: true })
+      window.addEventListener('scroll', this.onWindowScroll, { capture: true })
+    }
+  },
   methods: {
+    getPopoverComponents () {
+      return (this.$refs['pui-popover'] || [])
+    },
     onOpen (popoverParams) {
       const { useStack } = popoverParams.popoverOptions
       if (!useStack) {
@@ -52,8 +68,29 @@ export default {
       )
     },
     onCloseAll () {
-      (this.$refs['pui-popover'] || []).forEach(popoverComponent => {
+      this.getPopoverComponents().forEach(popoverComponent => {
         popoverComponent.onClose()
+      })
+    },
+    onWindowClick () {
+      this.getPopoverComponents().forEach(popoverComponent => {
+        if (popoverComponent.popoverOptions.clickToClose) {
+          popoverComponent.onClose()
+        }
+      })
+    },
+    onWindowResize () {
+      this.getPopoverComponents().forEach(popoverComponent => {
+        if (popoverComponent.popoverOptions.resizeToClose) {
+          popoverComponent.onClose()
+        }
+      })
+    },
+    onWindowScroll () {
+      this.getPopoverComponents().forEach(popoverComponent => {
+        if (popoverComponent.popoverOptions.scrollToClose) {
+          popoverComponent.onClose()
+        }
       })
     }
   }
@@ -63,5 +100,7 @@ export default {
 <style lang="scss" scoped>
 .pui-popover-container {
   position: fixed;
+  top: 0;
+  left: 0;
 }
 </style>

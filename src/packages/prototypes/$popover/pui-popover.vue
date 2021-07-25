@@ -125,7 +125,7 @@ export default {
 <style lang="scss" scoped>
 $popover-animation-names: 'fade';
 .pui-popover-layer{
-  position: fixed;
+  position: absolute;
   @each $animationName in $popover-animation-names {
     &.layer-#{$animationName}-in{
       @include animation-props(#{$animationName}In);

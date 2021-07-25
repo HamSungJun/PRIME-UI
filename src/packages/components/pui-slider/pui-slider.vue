@@ -171,7 +171,7 @@ export default {
       }, false)
     }
     /* 이 문장은 윈도우의 사이즈가 변화하였을 때 Viewport와 DOMRect().left 의 거리를 갱신해주기 위함이다. */
-    window.addEventListener('resize', this.$common.wrapDebounce(this.updateSliderRect, 500), false)
+    window.addEventListener('resize', this.$common.wrapDebounce(this.updateSliderRect, { duration: 500 }), false)
     this.calcGauge({
       eventType: 'prop',
       propValue: this.value

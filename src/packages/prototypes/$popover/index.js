@@ -11,9 +11,12 @@ Object.defineProperties(PUI_DEFAULT_POPOVER_OPTIONS, {
   useAnimation: { value: true, writable: true, configurable: false, enumerable: true },
   animationName: { value: 'fade', writable: true, configurable: false, enumerable: true },
   animationDuration: { value: 0.25, writable: true, configurable: false, enumerable: true },
-  closeOn: { value: [], writable: true, configurable: false, enumerable: true },
   useStack: { value: false, writable: true, configurable: false, enumerable: true },
-  mountAt: { value: null, writable: true, configurable: false, enumerable: true }
+  mountAt: { value: null, writable: true, configurable: false, enumerable: true },
+  clickToClose: { value: true, writable: true, configurable: false, enumerable: true },
+  resizeToClose: { value: true, writable: true, configurable: false, enumerable: true },
+  scrollToClose: { value: true, writable: true, configurable: false, enumerable: true },
+  responsive: { value: false, writable: true, configurable: false, enumerable: true }
 })
 
 const PUI_POPOVER_BUS = new Vue()

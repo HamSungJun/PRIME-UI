@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <pui-popover-container></pui-popover-container>
-    <button v-for="(p,i) in placements" :key="i" class="source" @mouseenter="onClick($event,p)" @mouseleave="onLeave">{{p}}</button>
+    <button v-for="(p,i) in placements" :key="i" class="source" @mouseenter="onClick($event,p)">{{p}}</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
         popoverComp: Popover,
         popoverOptions: {
           placement,
-          animationDuration: 0.35
+          animationDuration: 0.5
         }
       })
     },
@@ -36,7 +36,7 @@ export default {
 <style lang="scss">
 #app{
   width: 100vw;
-  height: 100vh;
+  height: 3000px;
   display: flex;
   align-items: center;
   justify-content: center;

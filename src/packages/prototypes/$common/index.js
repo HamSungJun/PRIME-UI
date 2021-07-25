@@ -1,6 +1,7 @@
 import {
   PUI_DEFAULT_THROTTLE_FREQUENCY,
-  PUI_DEFAULT_DEBOUNCE_DURATION
+  PUI_DEFAULT_DEBOUNCE_OPTION_DURATION,
+  PUI_DEFAULT_DEBOUNCE_OPTION_INITIAL
 } from '../../constants'
 import { placeAt } from './placer'
 /**
@@ -26,13 +27,23 @@ export function wrapThrottle (fn, frequency = PUI_DEFAULT_THROTTLE_FREQUENCY) {
  * @param {Function} fn
  * @param {Number} duration
  */
-export function wrapDebounce (fn, duration = PUI_DEFAULT_DEBOUNCE_DURATION) {
+export function wrapDebounce (fn, { duration = PUI_DEFAULT_DEBOUNCE_OPTION_DURATION, initial = PUI_DEFAULT_DEBOUNCE_OPTION_INITIAL } = {}) {
   let timerId = null
+  let isInitial = initial
   return (...args) => {
-    if (timerId) clearTimeout(timerId)
+    if (isInitial) {
+      fn(...args)
+      isInitial = false
+      return
+    }
+    if (timerId) {
+      clearTimeout(timerId)
+      timerId = null
+    }
     timerId = setTimeout(() => {
       fn(...args)
       timerId = null
+      isInitial = initial
     }, duration)
   }
 }

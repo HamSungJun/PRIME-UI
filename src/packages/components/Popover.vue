@@ -1,5 +1,5 @@
 <template>
-  <div class="pui-popover-sample">
+  <div class="pui-popover-sample" @mouseenter="onMouseEnter">
       <div class="pui-popover-header">
           <h1>This is Sample.</h1>
       </div>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Popover from './Popover.vue'
 export default {
   name: 'popover',
   methods: {
@@ -19,6 +20,16 @@ export default {
     },
     onCloseAll () {
       this.$emit('close-all')
+    },
+    onMouseEnter (event) {
+      this.$popover.open({
+        source: event.target,
+        popoverComp: Popover,
+        popoverOptions: {
+          placement: 'Bottom-Center',
+          useStack: true
+        }
+      })
     }
   }
 }
