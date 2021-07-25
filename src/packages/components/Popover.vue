@@ -1,17 +1,16 @@
 <template>
-  <div class="pui-popover-sample" @mouseenter="onMouseEnter">
-      <div class="pui-popover-header">
-          <h1>This is Sample.</h1>
-      </div>
-      <div class="pui-popover-body">
-          <pui-button :type="'primary'" outline @click="onClose">close</pui-button>
-          <pui-button :type="'primary'" outline @click="onCloseAll">closeAll</pui-button>
-      </div>
+  <div class="pui-popover-sample">
+      <div class="pui-popover-item">Item 1</div>
+      <div class="pui-popover-item">Item 2</div>
+      <div class="pui-popover-item">Item 3</div>
+      <section class="pui-popover-footer">
+        <pui-button @click="onClose" outline :size="'mini'" :type="'warning'">Close</pui-button>
+        <pui-button @click="onClose" outline :size="'mini'" :type="'primary'">Save</pui-button>
+      </section>
   </div>
 </template>
 
 <script>
-import Popover from './Popover.vue'
 export default {
   name: 'popover',
   methods: {
@@ -20,16 +19,6 @@ export default {
     },
     onCloseAll () {
       this.$emit('close-all')
-    },
-    onMouseEnter (event) {
-      this.$popover.open({
-        source: event.target,
-        popoverComp: Popover,
-        popoverOptions: {
-          placement: 'Bottom-Center',
-          useStack: true
-        }
-      })
     }
   }
 }
@@ -37,17 +26,30 @@ export default {
 
 <style lang="scss" scoped>
   .pui-popover-sample{
+    padding: 20px;
     width: 200px;
-    height: 200px;
-    border: 2px dashed cornflowerblue;
-    .pui-popover-header{
-      text-align: center;
-      padding-bottom: 20px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #ccc;
-    }
-    .pui-popover-body{
-
-    }
+    height: auto;
+    background-color: white;
+    box-shadow: 0px 2px 4px #ccc;
+    border-radius: 2px;
+    overflow: hidden;
+   .pui-popover-item {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     height: 40px;
+     padding: 10px 20px;
+     &:hover {
+       background-color: papayawhip;
+       color: salmon;
+     }
+     &:not(:last-child){
+       border-bottom: 1px solid papayawhip;
+     }
+   }
+   .pui-popover-footer {
+     text-align: center;
+     margin-top: 20px;
+   }
   }
 </style>

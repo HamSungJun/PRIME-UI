@@ -1,0 +1,71 @@
+<template>
+    <div class="wrapper">
+        <pui-popover-container></pui-popover-container>
+        <div class="grid">
+          <div v-for="(p, i) in placements" :key="i" class="grid-item" :class="p">
+            <pui-button
+              :type="'primary'"
+              :custom-class="'btn-block'"
+              outline
+              block
+              @mouseenter.native="openPopover($event, p)"
+            >
+              {{p}}
+            </pui-button>
+          </div>
+        </div>
+    </div>
+</template>
+<script>
+import Popover from '../Popover.vue'
+export default {
+
+  name: 'pui-popover',
+  data () {
+    return {
+      placements: [
+        'Top-Start', 'Top-Center', 'Top-End',
+        'Bottom-Start', 'Bottom-Center', 'Bottom-End',
+        'Left-Start', 'Left-Center', 'Left-End',
+        'Right-Start', 'Right-Center', 'Right-End'
+      ]
+    }
+  },
+  methods: {
+    openPopover (event, placement) {
+      this.$popover.open({
+        source: event.target,
+        popoverComp: Popover,
+        popoverOptions: {
+          placement
+        }
+      })
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.wrapper{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .grid{
+    display: grid;
+    width: 50%;
+    height: 50%;
+    row-gap: 40px;
+    column-gap: 40px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    .grid-item{
+      text-align: center;
+    }
+    .btn-block{
+      display: block;
+    }
+  }
+}
+</style>
