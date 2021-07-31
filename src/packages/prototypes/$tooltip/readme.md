@@ -40,14 +40,6 @@
 |`resizeToClose`|윈도우 리사이즈 이벤트에서 툴팁 인스턴스 해제 여부|Boolean|true|O|
 |`scrollToClose`|윈도우 및 HTML 엘리먼트 스크롤시 툴팁 인스턴스 해제 여부|Boolean|true|O|
 
-## Research & Analyze
-
-> -
-
-## Reconstruction
-
-- -
-
 ## Reference
 
 - [Tooltip - Ant Design](https://ant.design/components/tooltip/)
