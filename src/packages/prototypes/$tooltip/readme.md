@@ -28,10 +28,10 @@
 |`placement`|대상 엘리먼트에 툴팁 인스턴스 생성시 배치할 방향|String|'Top-Center'|O|
 |`autoPlacement`|툴팁을 지정방향에 발생시키는 단계에서 뷰포트 오버플로우 발생시 자동 재배치 여부|Boolean|true|O|
 |`customStyle`|툴팁 인스턴스에 인라인 스타일을 부여|Object|null|O|
-|`customClass`|툴팁 인스턴스에 커스텀 클래스를 부여|String|''|X|
-|`showDelay`|툴팁 인스턴스 생성시 지연 시간|String|0|X|
-|`hideDelay`|툴팁 인스턴스 해제시 지연 시간|String|0|X|
-|`useStack`|새로운 툴팁 인스턴스 생성시 기존의 툴팁 인스턴스 해제 여부|Boolean|true|X|
+|`customClass`|툴팁 인스턴스에 커스텀 클래스를 부여|String|''|O|
+|`showDelay`|툴팁 인스턴스 생성시 지연 시간|String|0|O|
+|`hideDelay`|툴팁 인스턴스 해제시 지연 시간|String|0|O|
+|`useStack`|새로운 툴팁 인스턴스 생성시 기존의 툴팁 인스턴스 해제 여부|Boolean|true|O|
 |`useArrow`|툴팁 인스턴스에 대상 엘리먼트를 가리키는 화살표 UI 사용 여부|Boolean|false|X|
 |`useAnimation`|툴팁 인스턴스 생성/해제시 애니메이션 사용 여부|String|true|O|
 |`animationName`|애니메이션 사용시 지정할 애니메이션 이름|String|'fade'|O|
