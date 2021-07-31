@@ -28,7 +28,7 @@
   
   - [Placer](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$common/placer)
   
-  - [Tooltip](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$Tooltip)
+  - [Tooltip](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$tooltip)
   
   - [Popover](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$popover)
 
