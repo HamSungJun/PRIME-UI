@@ -28,6 +28,8 @@
         {'pui-tree-node__item-status--visible': isInternalNode},
         {'pui-tree-node__item-status--invisible': !isInternalNode}
       ]"
+      @mouseenter="showTooltip($event, 'fold')"
+      @mouseleave="hideTooltip"
     >
       <font-awesome-icon
         :class="[{'rotate-180': !treeFold}]"
@@ -69,6 +71,8 @@
             'pui-tree-node__item',
             'pui-tree-node__item-function-icon',
           ]"
+          @mouseenter="showTooltip($event,'create-before')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'arrow-circle-up']"
@@ -81,6 +85,8 @@
             'pui-tree-node__item',
             'pui-tree-node__item-function-icon',
           ]"
+          @mouseenter="showTooltip($event,'create-after')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'arrow-circle-up']"
@@ -94,6 +100,8 @@
             'pui-tree-node__item',
             'pui-tree-node__item-function-icon',
           ]"
+          @mouseenter="showTooltip($event,'append-child')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'plus-circle']"
@@ -106,6 +114,8 @@
             'pui-tree-node__item',
             'pui-tree-node__item-function-icon',
           ]"
+          @mouseenter="showTooltip($event,'remove')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'trash-alt']"
@@ -118,6 +128,8 @@
             'pui-tree-node__item',
             'pui-tree-node__item-function-icon',
           ]"
+          @mouseenter="showTooltip($event,'update-node')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'pencil-alt']"
@@ -145,6 +157,8 @@
             'pui-tree-node__item-function-icon--handle',
           ]"
           ref="pui-tree-node-handle"
+          @mouseenter="showTooltip($event,'move-node')"
+          @mouseleave="hideTooltip"
         >
           <font-awesome-icon
             :icon="['fas', 'grip-vertical']"
@@ -331,6 +345,18 @@ export default {
     },
     onNodeDrop () {
       this.isDragEntered = false
+    },
+    showTooltip (event, textContent = '') {
+      this.$tooltip.show({
+        source: event.target,
+        textContent,
+        tooltipOptions: {
+          placement: 'Bottom-Center'
+        }
+      })
+    },
+    hideTooltip () {
+      this.$tooltip.hideAll()
     }
   }
 }

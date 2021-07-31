@@ -22,6 +22,23 @@
     - [x] 다이나믹 컴포넌트가 렌더링 하는 뷰의 형태에 따름.
     - [ ] [`placer.js`](../$common/placer) 의 반환값을 통해 지정 위치의 절대 좌표에 발생하고 이후 대상 엘리먼트의 위치가 변동하는 경우 `translate()` 속성을 통해 `repaint` 과정만 동반할 수 있도록 한다.
 
+## Options
+
+|Name|Desc|Type|Default|Available
+|:---:|:---:|:---:|:---:|:---:|
+|`distance`|팝오버를 발생시킬 대상 엘리먼트와 팝오버 사이의 거리|Number|20|O|
+|`placement`|대상 엘리먼트에 팝오버를 발생시킬 방향|String|'Top-Center'|O|
+|`useArrow`|팝오버에 대상 엘리먼트를 가리키는 화살표 UI 표시 여부|Boolean|false|X|
+|`useAnimation`|팝오버를 생성 및 해제하는 단계에서 애니메이션 효과 지정 여부|Boolean|true|O|
+|`animationName`|지정할 애니메이션 이름|String|'fade'|O|
+|`animationDuration`|지정한 애니메이션의 동작 시간|Number|0.25|O|
+|`useStack`|새로운 팝오버 인스턴스를 생성시 기존의 인스턴스 해제 여부|Boolean|true|O|
+|`mountAt`|-|Null|Null|X|
+|`clickToClose`|팝오버 인스턴스의 외부 영역 클릭시 인스턴스 해제 여부|Boolean|true|O|
+|`resizeToClose`|윈도우 리사이즈 이벤트에서 팝오버 인스턴스 해제 여부|Boolean|true|O|
+|`scrollToClose`|윈도우 및 HTML 엘리먼트 스크롤시 팝오버 인스턴스 해제 여부|Boolean|true|O|
+|`responsive`|반응형 동작 지원 여부|Boolean|false|X|
+
 ## Research & Analyze
 
 > 팝오버 발생 이후 윈도우 레벨의 스크롤, 리사이징 혹은 컨테이너의 스크롤 단계에서 대상 엘리먼트의 위치가 이동했을 때 팝오버에 반응형 옵션을 도입하여 같이 움직여주면 좋겠다고 생각하고 있다. 기본적인 구현이 완료되면 고급 옵션으로 포함할 예정이다.

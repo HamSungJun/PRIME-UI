@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import PuiPopover from './pui-popover.vue'
 import PuiPopoverContainer from './pui-popover-container.vue'
-import { PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX, PUI_DEFAULT_POPOVER_MAX_ROTATE_ID } from '../../constants'
+import { PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX, PUI_DEFAULT_MAX_ROTATE_ID } from '../../constants'
 
 const PUI_DEFAULT_POPOVER_OPTIONS = Object.create(null)
 Object.defineProperties(PUI_DEFAULT_POPOVER_OPTIONS, {
@@ -54,6 +54,7 @@ const setOption = (popoverOptions = {}) => {
 }
 
 export default {
+  name: '$popover',
   install (Vue, options = {}) {
     //* 일회성의 기본 전역 옵션 설정하기.
     for (const [optionKey, optionValue] of Object.entries(options)) {
@@ -78,7 +79,7 @@ export default {
         defaultMaxRotateId: {
           type: Number,
           required: false,
-          default: PUI_DEFAULT_POPOVER_MAX_ROTATE_ID
+          default: PUI_DEFAULT_MAX_ROTATE_ID
         }
       }
     }))

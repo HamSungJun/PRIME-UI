@@ -1,33 +1,46 @@
 <template>
   <div id="app">
+    <pui-modal-container></pui-modal-container>
     <pui-popover-container></pui-popover-container>
-    <button v-for="(p,i) in placements" :key="i" class="source" @mouseenter="onClick($event,p)">{{p}}</button>
+    <pui-tooltip-container></pui-tooltip-container>
+    <pui-treeview :treeData="treeData"></pui-treeview>
   </div>
 </template>
 
 <script>
-import Popover from '@/packages/components/Popover.vue'
 import { PUI_VALID_PLACEMENTS } from './packages/constants'
 export default {
   name: 'App',
   data () {
     return {
-      placements: [...PUI_VALID_PLACEMENTS]
+      placements: [...PUI_VALID_PLACEMENTS],
+      treeData: {
+        id: 0,
+        name: 'New Node.',
+        children: []
+      }
     }
   },
   methods: {
     onClick (event, placement) {
-      this.$popover.open({
+      this.$tooltip.show({
         source: event.target,
-        popoverComp: Popover,
-        popoverOptions: {
+        textContent: 'Insert After',
+        tooltipOptions: {
           placement,
-          animationDuration: 0.5
+          animationDuration: 0.5,
+          customStyle: {
+            textAlign: 'center'
+          }
+        },
+        tooltipHandlers: {
+          'after-show': () => { console.log('!!!') },
+          'after-hide': () => { console.log('XXX') }
         }
       })
     },
     onLeave (event) {
-      this.$popover.closeAll()
+      this.$tooltip.closeAll()
     }
   }
 }
@@ -36,7 +49,7 @@ export default {
 <style lang="scss">
 #app{
   width: 100vw;
-  height: 3000px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

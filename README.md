@@ -23,11 +23,15 @@
 - Prototypes
 
   - [Toast](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$toast)
-  
+
   - [Modal](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$modal)
   
   - [Placer](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$common/placer)
+  
+  - [Tooltip](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$Tooltip)
+  
   - [Popover](https://github.com/HamSungJun/PRIME-UI/tree/master/src/packages/prototypes/$popover)
+
 ## Reference
 - [Element-UI](https://element.eleme.cn/#/en-US)
 - [BootStrap-Vue](https://bootstrap-vue.org/)

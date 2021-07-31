@@ -1,11 +1,12 @@
 import { PUI_VALID_PLACEMENTS } from '../../../constants'
+
 /**
  * @description 기준 엘리먼트와 배치할 엘리먼트 두 요소간 절대 좌표를 확인하여 배치할 엘리먼트가 위치해야 할 절대 좌표 및 뷰포트와 충돌시 입은 픽셀 손해량을 계산하는 함수
  * @param {HTMLElement} source 뷰포트 상에서의 기준점으로 이용할 엘리먼트
  * @param {HTMLElement} target 뷰포트 상에서 기준점으로 이용할 엘리먼트의 특정 방향에 배치시킬 엘리먼트
  * @returns 배치할 엘리먼트가 뷰포트와 충돌시 입은 픽셀 손해량, 특정 방향에 배치할 경우 top, left 값 {damage: number, top: number, left: number}
  */
-export const placeAt = ({ source = null, target = null, placement = '', distance = 0 } = {}) => {
+export const placeAt = ({ source = null, target = null, placement = '', distance = 0, autoPlacement = false } = {}) => {
   if (!placement || !PUI_VALID_PLACEMENTS.has(placement)) return null
   if ([source, target].some(el => !(el instanceof HTMLElement))) return null
   //* 좌표를 확인하는 함수는 ReFlow 연산에 대한 코스트를 부담하므로 계산하기전 변수에 담아 참조로 동작하도록 합니다.
@@ -14,21 +15,20 @@ export const placeAt = ({ source = null, target = null, placement = '', distance
   const sourceRect = source.getBoundingClientRect()
   const targetRect = target.getBoundingClientRect()
   const operands = { windowIWidth, windowIHeight, sourceRect, targetRect, distance }
-  switch (placement) {
-    case 'Top-Start': return placeAtTopStart(operands)
-    case 'Top-Center': return placeAtTopCenter(operands)
-    case 'Top-End': return placeAtTopEnd(operands)
-    case 'Bottom-Start': return placeAtBottomStart(operands)
-    case 'Bottom-Center': return placeAtBottomCenter(operands)
-    case 'Bottom-End': return placeAtBottomEnd(operands)
-    case 'Left-Start': return placeAtLeftStart(operands)
-    case 'Left-Center': return placeAtLeftCenter(operands)
-    case 'Left-End': return placeAtLeftEnd(operands)
-    case 'Right-Start': return placeAtRightStart(operands)
-    case 'Right-Center': return placeAtRightCenter(operands)
-    case 'Right-End': return placeAtRightEnd(operands)
-    default: return null
+  let placeResult = { ...placeFunctionMap[placement](operands), placement }
+  if (autoPlacement && placeResult.damage > 0) {
+    for (const nextPlacement of PUI_VALID_PLACEMENTS) {
+      if (nextPlacement === placement) continue
+      const nextPlaceResult = placeFunctionMap[nextPlacement](operands)
+      if (nextPlaceResult.damage === 0) {
+        placeResult = { ...nextPlaceResult, placement }
+        break
+      } else if (nextPlaceResult.damage < placeResult.damage) {
+        placeResult = { ...nextPlaceResult, placement }
+      }
+    }
   }
+  return placeResult
 }
 
 export const placeAtTopStart = ({ windowIWidth, windowIHeight, sourceRect, targetRect, distance }) => {
@@ -278,3 +278,18 @@ const setReturn = (obj) => {
   }
   return pureObject
 }
+
+const placeFunctionMap = Object.create(null, {
+  'Top-Start': { value: placeAtTopStart, writable: false, configurable: false, enumerable: true },
+  'Top-Center': { value: placeAtTopCenter, writable: false, configurable: false, enumerable: true },
+  'Top-End': { value: placeAtTopEnd, writable: false, configurable: false, enumerable: true },
+  'Bottom-Start': { value: placeAtBottomStart, writable: false, configurable: false, enumerable: true },
+  'Bottom-Center': { value: placeAtBottomCenter, writable: false, configurable: false, enumerable: true },
+  'Bottom-End': { value: placeAtBottomEnd, writable: false, configurable: false, enumerable: true },
+  'Left-Start': { value: placeAtLeftStart, writable: false, configurable: false, enumerable: true },
+  'Left-Center': { value: placeAtLeftCenter, writable: false, configurable: false, enumerable: true },
+  'Left-End': { value: placeAtLeftEnd, writable: false, configurable: false, enumerable: true },
+  'Right-Start': { value: placeAtRightStart, writable: false, configurable: false, enumerable: true },
+  'Right-Center': { value: placeAtRightCenter, writable: false, configurable: false, enumerable: true },
+  'Right-End': { value: placeAtRightEnd, writable: false, configurable: false, enumerable: true }
+})
