@@ -3,7 +3,9 @@
     <pui-modal-container></pui-modal-container>
     <pui-popover-container></pui-popover-container>
     <pui-tooltip-container></pui-tooltip-container>
-    <pui-treeview :treeData="treeData"></pui-treeview>
+    <div class="box">
+       <pui-treeview :treeData="treeData"></pui-treeview>
+    </div>
   </div>
 </template>
 

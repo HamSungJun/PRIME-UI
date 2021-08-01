@@ -63,7 +63,7 @@ export default {
     },
     treeFold: {
       type: Boolean,
-      default: true,
+      default: false,
       required: false
     },
     treeLevel: {
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pui-tree{
+// .pui-tree{
 
-}
+// }
 </style>

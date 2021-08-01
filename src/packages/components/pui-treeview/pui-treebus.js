@@ -60,12 +60,20 @@ export const PUI_TREE_BUS = function () {
         this.dragNode = dragNode
         this.$emit('drag-start', { dragNode })
       },
+      onDrop ({ dropNode }) {
+        const children = this.dragNode.treeDataParent.children
+        const target = this.dragNode.treeData
+        dropNode.treeData.children.push(target)
+        children.splice(
+          children.findIndex(ref => ref === target),
+          1
+        )
+      },
       onDragEnd () {
         this.dragNode = null
         this.$emit('drag-end')
       },
       checkDroppable ({ dropNode }) {
-        console.log()
         if (this.isDragNodeParentOfDropNode({ dragNode: this.dragNode, dropNode })) {
           return false
         }

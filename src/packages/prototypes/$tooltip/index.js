@@ -53,7 +53,6 @@ const setOption = (tooltipOptions = {}) => {
       Object.defineProperty(newOption, optionKey, { value: optionValue })
     }
   }
-  console.log(newOption)
   return newOption
 }
 

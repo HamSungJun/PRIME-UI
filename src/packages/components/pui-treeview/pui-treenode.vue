@@ -289,6 +289,7 @@ export default {
               nodeName: this.treeNodeDefaultName
             })
           case 'pui-tree-node-append':
+            if (this.treeFold) this.$emit('tree-fold')
             return this.treeBus.onAppend({
               currentNode: this.treeData,
               nodeName: this.treeNodeDefaultName
@@ -327,6 +328,7 @@ export default {
       this.$refs['pui-tree-node-update-end'].click()
     },
     onNodeDragStart () {
+      this.hideTooltip()
       this.treeBus.onDragStart({ dragNode: this })
     },
     onNodeDragEnter () {
@@ -345,6 +347,11 @@ export default {
     },
     onNodeDrop () {
       this.isDragEntered = false
+      if (this.isDroppable) {
+        this.treeBus.onDrop({
+          dropNode: this
+        })
+      }
     },
     showTooltip (event, textContent = '') {
       this.$tooltip.show({
