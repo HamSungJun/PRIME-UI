@@ -61,8 +61,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper{
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;

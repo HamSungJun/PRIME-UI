@@ -86,7 +86,8 @@ export default {
         }
       })
     },
-    onWindowScroll () {
+    onWindowScroll (event) {
+      if (event.target instanceof HTMLElement && event.target.closest('.__PUI_POPOVER_LAYER__')) return
       this.getPopoverComponents().forEach(popoverComponent => {
         if (popoverComponent.popoverOptions.scrollToClose) {
           popoverComponent.onClose()
