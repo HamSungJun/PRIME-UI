@@ -3,47 +3,89 @@
     <pui-modal-container></pui-modal-container>
     <pui-popover-container></pui-popover-container>
     <pui-tooltip-container></pui-tooltip-container>
-    <div class="box">
-       <pui-treeview :treeData="treeData"></pui-treeview>
-    </div>
+    <pui-lazy-loader>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <!-- <pui-image :src="'https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image> -->
+          <img data-src="https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg" alt="">
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image  :src="'https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image src="https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg" alt="lake" width="300" height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/07/05/19/38/scarlet-lily-beetle-6389888__480.jpg'" :alt="'lake2'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/06/08/09/21/mountain-6320288__480.jpg'" alt="'lake3'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/07/11/10/39/fantasy-6403406__480.jpg'" :alt="'lake4'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/07/20/04/17/tasmanian-devil-6479685__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/07/18/14/59/family-6475821__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/08/02/16/22/beach-6517214__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+      <div class="image-card">
+        <div><h3>Image</h3></div>
+        <div>
+          <pui-image :src="'https://cdn.pixabay.com/photo/2021/08/04/10/21/lake-6521474__480.jpg'" :alt="'lake'" :width="300" :height="300"></pui-image>
+        </div>
+      </div>
+    </pui-lazy-loader>
   </div>
 </template>
 
 <script>
-import { PUI_VALID_PLACEMENTS } from './packages/constants'
+
 export default {
   name: 'App',
   data () {
     return {
-      placements: [...PUI_VALID_PLACEMENTS],
-      treeData: {
-        id: 0,
-        name: 'New Node.',
-        children: []
-      }
+
     }
   },
   methods: {
-    onClick (event, placement) {
-      this.$tooltip.show({
-        source: event.target,
-        textContent: 'Insert After',
-        tooltipOptions: {
-          placement,
-          animationDuration: 0.5,
-          customStyle: {
-            textAlign: 'center'
-          }
-        },
-        tooltipHandlers: {
-          'after-show': () => { console.log('!!!') },
-          'after-hide': () => { console.log('XXX') }
-        }
-      })
-    },
-    onLeave (event) {
-      this.$tooltip.closeAll()
-    }
+
   }
 }
 </script>
@@ -53,48 +95,22 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: row;
-  .button{
-    display: inline-block;
-    width: 100px;
-    height: 50px;
+  .image-card{
     border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  .box{
-    border: 1px dashed #ccc;
-    width: 600px;
-    height: 1000px;
-    overflow: auto;
-    padding: 20px;
-  }
-  .source {
-    border: 1px dashed blue;
-    width: 100px;
-    height: 100px;
-    transform: translate(-50%,-50%);
-  }
-  .target {
-    transition: all 1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 1px dashed red;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    font-size: 10px;
-  }
-  .btn {
-    cursor: pointer;
-    position: fixed;
-    z-index: 0;
-  }
-  input {
-    border: 1px solid #ccc;
+    width: 400px;
+    height: 400px;
+    div:nth-child(1){
+      height: 100px;
+    }
+    div:nth-child(2){
+      height: 300px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 </style>
