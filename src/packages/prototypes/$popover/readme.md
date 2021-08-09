@@ -9,6 +9,7 @@
 - `동작`
 
     - [x] 팝오버 엘리먼트를 대상 엘리먼트의 특정 방향에 발생 시킬 수 있다.
+    - [x] 팝오버 엘리먼트를 특정 방향이 아닌 절대 위치값에 위치하도록 설정할 수 있다.
     - [x] 팝오버 엘리먼트가 활성화/비활성화 되는 단계에 애니메이션을 지정할 수 있다.
     - [x] 대상 엘리먼트와 팝오버 엘리먼트 사이의 거리를 지정 할 수 있다.
     - [ ] 팝오버 엘리먼트에 화살표 표시 여부를 지정할 수 있다.
@@ -24,10 +25,13 @@
 
 ## Options
 
-|Name|Desc|Type|Default|Available
+|Name|Desc|Type|Default|Available|
 |:---:|:---:|:---:|:---:|:---:|
+|`top`|팝오버를 뷰포트의 절대적인 위치에 발생시키기 위한 속성값|Number|0|O|
+|`left`|팝오버를 뷰포트의 절대적인 위치에 발생시키기 위한 속성값|Number|0|O|
 |`distance`|팝오버를 발생시킬 대상 엘리먼트와 팝오버 사이의 거리|Number|20|O|
 |`placement`|대상 엘리먼트에 팝오버를 발생시킬 방향|String|'Top-Center'|O|
+|`autoPlacement`|팝오버를 발생시킬때 뷰포트와 충돌시 재배치 여부|Boolean|true|O|
 |`useArrow`|팝오버에 대상 엘리먼트를 가리키는 화살표 UI 표시 여부|Boolean|false|X|
 |`useAnimation`|팝오버를 생성 및 해제하는 단계에서 애니메이션 효과 지정 여부|Boolean|true|O|
 |`animationName`|지정할 애니메이션 이름|String|'fade'|O|

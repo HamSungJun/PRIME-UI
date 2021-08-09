@@ -2,6 +2,7 @@
   <div
     :style="layerStyle"
     :class="[
+      '__PUI_POPOVER_LAYER__',
       'pui-popover-layer',
       layerAnimation
     ]"
@@ -9,11 +10,11 @@
     @click.stop
   >
     <component
-        :is="popoverComp"
-        v-bind="popoverProps"
-        @close="onClose"
-        @close-all="onCloseAll"
-        ref="pui-popover-target"
+      :is="popoverComp"
+      v-bind="popoverProps"
+      @close="onClose"
+      @close-all="onCloseAll"
+      ref="pui-popover-target"
     />
   </div>
 </template>
@@ -71,19 +72,28 @@ export default {
       const { isAppearing, isComponentVisible } = this
       const { animationName } = this.popoverOptions
       return isComponentVisible ? `layer-${animationName}-${isAppearing ? 'in' : 'out'}` : ''
+    },
+    isFixing () {
+      const { top, left } = this.popoverOptions
+      return (typeof top === 'number' && top !== 0) || (typeof left === 'number' && left !== 0)
     }
   },
   async mounted () {
     //* $nextTick() 함수를 통해 동적 컴포넌트의 Layout 페이즈를 완료한 후 위치 계산을 시작합니다.
     await this.$nextTick()
     this.layerEl = this.$refs['pui-popover-layer']
-    const source = this.source
-    const target = this.$refs['pui-popover-target'].$el
-    const { placement, distance } = this.popoverOptions
-    const { damage, top, left } = this.$common.placeAt({ source, target, placement, distance })
-    console.log(damage, top, left)
-    this.layerTop = top
-    this.layerLeft = left
+    if (this.isFixing) {
+      const { top, left } = this.popoverOptions
+      this.layerTop = top
+      this.layerLeft = left
+    } else {
+      const source = this.source
+      const target = this.$refs['pui-popover-target'].$el
+      const { placement, distance, autoPlacement } = this.popoverOptions
+      const { top, left } = this.$common.placeAt({ source, target, placement, distance, autoPlacement })
+      this.layerTop = top
+      this.layerLeft = left
+    }
     this.isAppearing = true
     this.isComponentVisible = true
     this.onAfterOpen()

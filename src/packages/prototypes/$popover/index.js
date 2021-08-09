@@ -5,8 +5,11 @@ import { PUI_DEFAULT_POPOVER_CONTAINER_ZINDEX, PUI_DEFAULT_MAX_ROTATE_ID } from 
 
 const PUI_DEFAULT_POPOVER_OPTIONS = Object.create(null)
 Object.defineProperties(PUI_DEFAULT_POPOVER_OPTIONS, {
+  top: { value: 0, writable: true, configurable: false, enumerable: true },
+  left: { value: 0, writable: true, configurable: false, enumerable: true },
   distance: { value: 20, writable: true, configurable: false, enumerable: true },
   placement: { value: 'Top-Center', writable: true, configurable: false, enumerable: true },
+  autoPlacement: { value: true, writable: true, configurable: false, enumerable: true },
   useArrow: { value: false, writable: true, configurable: false, enumerable: true },
   useAnimation: { value: true, writable: true, configurable: false, enumerable: true },
   animationName: { value: 'fade', writable: true, configurable: false, enumerable: true },

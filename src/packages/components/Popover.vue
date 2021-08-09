@@ -4,8 +4,7 @@
       <div class="pui-popover-item">Item 2</div>
       <div class="pui-popover-item">Item 3</div>
       <section class="pui-popover-footer">
-        <pui-button @click="onClose" outline :size="'mini'" :type="'warning'">Close</pui-button>
-        <pui-button @click="onClose" outline :size="'mini'" :type="'primary'">Save</pui-button>
+        <pui-button @click="onClose" outline :size="'mini'" :type="'warning'">Confirm</pui-button>
       </section>
   </div>
 </template>
@@ -28,28 +27,32 @@ export default {
   .pui-popover-sample{
     padding: 20px;
     width: 200px;
-    height: auto;
+    height: 150px;
     background-color: white;
     box-shadow: 0px 2px 4px #ccc;
     border-radius: 2px;
-    overflow: hidden;
+    overflow: auto;
    .pui-popover-item {
      display: flex;
      align-items: center;
      justify-content: flex-start;
      height: 40px;
      padding: 10px 20px;
+     color: slategray;
      &:hover {
        background-color: papayawhip;
        color: salmon;
      }
      &:not(:last-child){
-       border-bottom: 1px solid papayawhip;
+       border-bottom: 1px dashed #ccc;
      }
    }
    .pui-popover-footer {
      text-align: center;
      margin-top: 20px;
+     .pui-button{
+       display: block;
+     }
    }
   }
 </style>
